@@ -1,0 +1,5 @@
+---
+# This is a template file which needs to be edited by hand and placed
+# in the directory above the project directory so that private information can be used.
+git_personal_access_token: 0123456789abcdef0123456789abcdef01234
+database_password: 0123-4567-890A-BCDE-FGHI

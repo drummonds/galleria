@@ -1,0 +1,23 @@
+# Development Inventory file
+
+[webservers]
+ec2-54-247-8-26.eu-west-1.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/galleria.pem
+
+
+[dbservers]
+
+
+[launched]
+
+[local]
+127.0.0.1
+
+[all:children]
+webservers
+dbservers
+launched
+local
+
+[all:vars]
+deploy_file=development
+database_endpoint=django-test.cpgyypvjajxe.eu-west-1.rds.amazonaws.com

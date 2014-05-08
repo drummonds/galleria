@@ -1,0 +1,6 @@
+---
+project_name: galleria
+project_dir: /home/ubuntu/projects
+project_root: "{{ project_dir }}/galleria"
+project_fqdn: "{{  deploy_file }}.galleria.drummonds.net"
+usr: ubuntu # default user

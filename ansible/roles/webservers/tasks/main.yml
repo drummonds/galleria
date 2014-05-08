@@ -1,0 +1,212 @@
+---
+# Webservers tasks
+
+# User and groups setup
+
+- name: Create user.
+  user: name={{ project_name }} state=present
+
+# Get the files, including the configuration files that are needed to setup the
+# system
+
+- name: Create the project directory.
+  file: state=directory path=/home/ubuntu/projects/{{ project_name }}
+    owner={{ usr }} group={{ usr }}
+    
+- name: Git clone
+  git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/django_test.git
+    dest=/home/ubuntu/projects/{{ project_name }}
+    accept_hostkey=True 
+
+  #Not perfect as really wanted to do the git with the required user rather than change
+  #ownwer and group later.  But need to do some commands with sudo
+- name: Change owner 
+  file: state=directory path=/home/ubuntu/projects/{{ project_name }}
+    owner={{ usr }} group={{ usr }}
+    recurse=yes
+  
+# Make sure directory for ephemeral files is created.
+- name: add ephemeral file directory
+  file: state=directory path=/home/ubuntu/projects/{{ project_name }}/etc
+    owner={{ usr }} group={{ usr }}
+
+
+# Environment setup
+
+- name: Install required system packages.
+  apt: "pkg={{ item }} state=installed update-cache=yes"
+  with_items: 
+    - build-essential
+    - libevent-dev
+    - nginx
+    - postgresql
+    - postgresql-server-dev-all
+    - redis-server # Not currently used
+    - postfix # Not currently used
+
+- name: Install required easy install Python packages.
+  easy_install: name={{ item  }}
+  with_items: 
+    - pip
+
+- name: Install the main pip Python packages to run the environment
+  pip: name={{ item  }}
+  sudo: yes
+  with_items:
+    - virtualenv
+    - virtualenvwrapper  # Make it bit easier if poking about manually but not
+      # actually used
+    - uwsgi # for system wide installation
+    - psycopg2 # Needed for Ansible to do database create
+
+
+# Python 3 setup
+
+- name: Install required system packages for Python 3
+  action: apt pkg={{item}} state=installed update-cache=yes
+  sudo: yes
+  with_items:
+    - python3
+    - python3-dev
+    - python3-psycopg2
+    - python3-setuptools
+
+- name: Install required easy install Python 3 packages.
+  action: shell easy_install3 {{ item  }}
+  with_items: 
+    - pip
+  sudo: yes
+
+- name: ensure virtualenv is installed
+  sudo: yes
+  action: shell pip install virtualenv
+
+
+# Now create the virtual environment
+- name: "Create virtualenv"
+  shell: virtualenv --python=/usr/bin/python3.4 "/home/ubuntu/.virtualenvs/{{ project_name }}"
+         creates="/home/ubuntu/.virtualenvs/{{ project_name }}/bin/activate"
+
+  # Setup the virtualenvwrapper
+- name: export work for virtual env wrapper
+  lineinfile: dest="/home/ubuntu/.profile"
+    line="export WORKON_HOME=$HOME/.virtualenvs"
+
+- name: enable shell script
+  lineinfile: dest="/home/ubuntu/.profile"
+    line="source /usr/local/bin/virtualenvwrapper.sh"
+
+# - name: Install the rest of pip Python packages.
+#   pip: name={{ item  }} virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}
+#   with_items: 
+#     - virtualenv
+#     - virtualenvwrapper
+#     - django
+#     - south
+#     - boto
+#     - psycopg2
+#     - uwsgi # for testing purposes
+# 
+- name: ensure required packages are installed.
+  sudo: yes
+  action: pip 
+    requirements={{project_root}}/requirements/{{ deploy_file }}.txt virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }} virtualenv_command=virtualenv-3.4
+
+
+
+
+#- name: ensure virtualenv is installed
+#  sudo: yes
+#  action: shell pip install virtualenv
+
+
+
+# Project setup
+- name: Create the project directory.
+  file: state=directory path=/home/ubuntu/projects 
+    owner={{ usr }} group={{ usr }}
+ 
+
+# Install uWSGI
+- name: add uWSGI parameter file
+  template: src=uwsgi.ini.j2
+    dest=/home/ubuntu/projects/{{ project_name }}/etc/{{ project_name }}_uwsgi.ini
+    
+- name: Create the directory for the vassals (using uwsgi in emperor mode)
+  file: state=directory path=/etc/uwsgi/vassals
+    owner={{ usr }} group={{ usr }}
+  tags:
+    - debug
+
+- name: Create a sym link from ini file to the vassals
+  file: src=/home/ubuntu/projects/{{ project_name }}/etc/{{ project_name }}_uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
+  tags:
+    - debug
+
+- name: Install uwsgi service script
+  copy: src=uwsgi_emperor.conf dest=/etc/init/uwsgi.conf
+  notify: restart uwsgi
+  tags:
+    - debug
+    
+#  Customise deployment so django is set to the correct environment
+#  First connect the database
+
+- name: Connect database endpoint to django
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_HOST" 
+    line="DATABASE_HOST = '{{ database_endpoint }}'"
+
+- name: set database port for django
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_PORT" 
+    line="DATABASE_PORT = 3306"
+
+- name: set database user for django
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_USER" 
+    line="DATABASE_USER = 'postgres_admin'"
+
+- name: set database user for django
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_PASSWORD" 
+    line="DATABASE_PASSWORD = '{{ database_password }}'"
+    
+- name: Create a new Django database with standard name 
+  postgresql_db: name=django_test_db
+    encoding='UTF-8'
+    login_host={{ database_endpoint }}
+    port=3306
+    login_user=postgres_admin
+    login_password={{  database_password  }}
+
+- name: Sync Django database.
+  django_manage: >
+    command=syncdb
+    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    
+- name: migrate django database. may need to do by app
+  django_manage: >
+    command=migrate
+    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    
+- name: add static root to settings file
+  lineinfile: >
+    dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^STATIC_ROOT"
+    line="STATIC_ROOT = '/home/ubuntu/projects/{{ project_name }}/static/'"
+    
+- name: collect static files.
+  django_manage: >
+    command=collectstatic
+    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    
+- name: Install nginx 
+  include: nginx.yml
+
+# Assuming this is not needed
+#  handlers:
+#    - include: ../handlers/main..yml

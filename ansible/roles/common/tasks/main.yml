@@ -1,0 +1,15 @@
+---
+#  Common tasks
+
+- name: Install required system packages.
+  apt: "pkg={{ item }} state=installed update-cache=yes"
+  with_items: 
+    - git
+    - ntp
+    - python-dev
+    - python-setuptools
+
+- name: Ensure NTP is up and running  # Using the "service" module to check 
+  #state of ntp.  Note in 14.04 it is now ntp not ntpd
+  action: service name=ntp state=started     
+

@@ -1,0 +1,28 @@
+# {{ project_name }}_uwsgi.ini file
+# Placed in etc directory which is ignored by git
+# /home/ubuntu/projects/{{ project_name }}/etc
+[uwsgi]
+
+# Django-related settings
+# the base directory (full path)
+chdir           = /home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+# Django's wsgi file
+module          = {{ project_name }}.wsgi
+# the virtualenv (full path)
+home            = /home/ubuntu/.virtualenvs/{{ project_name }}
+
+# process-related settings
+# master
+master          = true
+# maximum number of worker processes
+processes       = 10
+# the http link
+http          = :8001
+# or the socket (use the full path to be safe
+#socket          = /home/ubuntu/projects/{{ project_name }}/venv/mysite.sock
+# the socket (use the full path to be safe
+#socket          = /home/ubuntu/projects/{{ project_name }}/venv/mysite.sock
+# ... with appropriate permissions - may be needed
+# chmod-socket    = 664
+# clear environment on exit
+vacuum          = true

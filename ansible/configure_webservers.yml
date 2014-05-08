@@ -1,0 +1,20 @@
+---
+# Play to configure instances
+- name: Configure webservers
+  hosts: webservers
+  user: ubuntu
+  gather_facts: false
+  sudo: true
+  
+
+  #Include secret information outside of git a copy of a template is in the files
+  #directory
+  vars_files:
+    - ../../personal.yml
+    - vars.yml
+
+  roles:
+     - common
+     - webservers
+ 
+

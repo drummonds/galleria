@@ -1,0 +1,28 @@
+---
+- name: install nginx as a front end web server
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - nginx
+
+- name: create /var/log/nginx before checking the config ??Haven't tested if need this
+  lineinfile: dest=/etc/init.d/nginx regexp="DAEMON -t" line="mkdir -p /var/log/nginx; $DAEMON -t $DAEMON_OPTS" backup=yes
+  notify: restart nginx
+
+- name: update copy over the root nginx config
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+
+# Note the automatic up and down into the template directory
+- name: template and send over the configuration for this site
+  template: src=django.nginx.j2 dest=/etc/nginx/sites-available/{{ project_name }}
+  notify: restart nginx
+
+- name: remove default site
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: restart nginx
+
+- name: enable this site by creating link
+  file: src=/etc/nginx/sites-available/{{ project_name }} dest=/etc/nginx/sites-enabled/{{ project_name }} state=link
+  notify: restart nginx
+
+

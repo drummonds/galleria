@@ -1,0 +1,51 @@
+---
+# Play to provision instances
+- name: provision webservers
+  hosts:  local
+  connection: local
+  user: humphrey
+  gather_facts: false
+
+  vars_files:
+    - ../../personal.yml
+    - vars.yml
+
+  vars:
+    - keypair: galleria
+    #t1.micro instance has no instance memory ans so incurs extra cost in ebs storage. avoiding complexity by using
+    #smallest regular instance
+    - instance_type:  m1.small
+    - security_group: webappsecuritygroup
+    - image: ami-116b9166
+    - region: "eu-west-1"
+
+
+  tasks:
+  - name: Launch instance
+    local_action: ec2
+      keypair={{ keypair }}
+      group={{ security_group}}
+      instance_type={{ instance_type }}
+      instance_tags='{"deployFile":"{{ deploy_file }}"}'
+      image={{ image }}
+      region={{ region }}
+      wait=true count=1
+    register: ec2
+
+  - name: Add new instance to temporary host group in memory
+    local_action: add_host name={{ item.public_ip }} groupname=webservers
+    with_items: ec2.instances
+    
+  - name: Add instance to webservers group for next time ansible is run
+    local_action: lineinfile dest={{ deploy_file }} 
+      insertafter="\[webservers\]" 
+      line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
+    with_items: ec2.instances
+
+  - name: wait for instances to listen on port:22
+    wait_for:
+      state=started
+      host={{ item.public_dns_name }}
+      port=22
+    with_items: ec2.instances
+
