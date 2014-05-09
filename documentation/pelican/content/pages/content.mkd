@@ -1,10 +1,7 @@
-Title: Contents
+Title: Welcome to galleria - the open source gallery software
+URL:
+save_as: index.html
 Date: 2014-05-09 12:28
-Category: galleria
-Tags: Contents
-Slug: Contents
-Author: Humphrey Drummond
-Summary: Contents
 
 galleria
 ========

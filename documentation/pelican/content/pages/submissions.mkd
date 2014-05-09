@@ -1,0 +1,8 @@
+Title: Submissions
+URL:
+Date: 2014-05-09 12:28
+Category: Development
+
+To submit to this version required the code to be licensed to drummonds.net as the sponsoring organsisation as well as open sourced.  A license to deal with it is here:
+
+If you don't want to do that then you can fork the development as it currently is.

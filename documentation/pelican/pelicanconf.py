@@ -3,7 +3,7 @@
 
 AUTHOR = 'Humphrey Drummond'
 SITENAME = 'galleria documentation'
-SITEURL = 'http://drummonds.gihub.io/galleria'
+SITEURL = 'http://drummonds.github.io/galleria'
 RELATIVE_URLS = False
 
 
@@ -39,6 +39,8 @@ THEME = "/home/trusty/projects/galleria/documentation/pelican_theme/bootstrap2H3
 ARTICLE_EXCLUDES = (('archive','output')) #syntax error?
 PAGE_EXCLUDES = (('archive','output')) #syntax error?
 
+#Assumes project set up
+OUTPUT_PATH = '../../../galleria_docs/'
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""

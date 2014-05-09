@@ -11,15 +11,9 @@ It will have a number of modules to cover the normal operations:
 - website building
 - artist portfolio management
 
+For more information see the linked website [galleria][].  This has information on the current status and how to contribute.
 
-The software is available dual licensed under a permissive Apache license and also commerically licensed through drummonds.net.  Drummonds.net will be running and supporting the software commercially for those that need it.
+[galleria]: http://drummonds.github.io/galleria/index.html
 
-
-The technology platform is based around Django and a Javascript JQuery front end.
-
-Enjoy as they say across the water!
-
-Status:
-V 0.0.0 This is at inception.
 
 

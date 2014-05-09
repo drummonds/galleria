@@ -1,0 +1,30 @@
+Title: Development Roadmap
+URL:
+Date: 2014-05-09 12:28
+Category: Development
+
+##Phase 1 Inception
+Working Contact types.  See [Phase 1 Details][]
+[Phase 1 Details]:  ({filename}/phase 1.md)
+
+##Phase 2 
+Read only contacts
+
+##Phase 3
+Read write contacts
+
+##Phase 4
+Contact list management and print out of lists
+
+##Phase 5
+Artist portfolio management
+
+##Phase 6
+Website building
+
+Wish list:
+Scalable deployement - eg from small to large scale deployement
+Micro deployement to Raspbery Pi
+Possible deployment to Docker containers
+
+

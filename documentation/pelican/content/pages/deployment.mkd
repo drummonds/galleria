@@ -1,0 +1,25 @@
+Title: Deployment to EC2
+URL:
+Date: 2014-05-09 12:28
+
+To deploy you need a linux machine with ansible installed.  The project needs to be deployed from github
+
+````
+git clone xxx
+````
+
+In the project above you need to setup the private file as documented in ansible/files/private.yml.  You also need to setup an SSH keypair, private to you for managing you EC2 instances and export your key and private key as environment variables.
+
+Then the following should setup a working instance in EC2.  Automatic inventory management is not yet implemented so.  Before you do this you will need to check the inventory file  ansible/development and make sure any webservers that have previously been added are removed.  The ansible script will still run but give you fail messages for all the servers that don't exist.
+
+````
+ansible-playbook -i development infrastructure.yml
+````
+
+You can then browse to the public IP address and see the state of development.
+
+#Don't forget to kill them by hand as Amazon will charge you for running.
+Use the AWS management console.
+
+
+I will be trying to simplify this process with an iPython notebook that will do it all for you.
