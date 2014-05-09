@@ -1,5 +1,6 @@
 Title: Deployment to EC2
-URL:
+URL: deployment.html
+SAVE_AS: deployment.html
 Date: 2014-05-09 12:28
 
 To deploy you need a linux machine with ansible installed.  The project needs to be deployed from github

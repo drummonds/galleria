@@ -1,7 +1,8 @@
 Title: Document Production
-URL:
+URL: document-production.html
+SAVE_AS: document-production.html
 Date: 2014-05-09 12:28
-Category: Development
+Category: Documentation
 
 #Overview
 The documentation is produced by pelican inside the project and then the output is put to an orphan branch of the project maintained inside the main git hub called `gh-pages`.  This is githubs way of providing static hosting from inside a repository.  You are currently looking at the results of this.

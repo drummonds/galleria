@@ -1,5 +1,6 @@
 Title: Submissions
-URL:
+URL: submissions.html
+SAVE_AS: submissions.html
 Date: 2014-05-09 12:28
 Category: Development
 

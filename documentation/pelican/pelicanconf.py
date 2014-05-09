@@ -17,20 +17,21 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
-LINKS =  (('Pelican', 'http://getpelican.com/'),
+LINKS =  (('Galleria homepage','https://github.com/drummonds/galleria'),
+          ('Phase 1','/phase-1.html'),
+          ('Pelican', 'http://getpelican.com/'),
 	  ("Markdown syntax", 'http://daringfireball.net/projects/markdown/syntax'),
           ('Python.org', 'http://python.org/'),
-          ('Jinja2', 'http://jinja.pocoo.org/'),
-          ('You can modify those links in your config file', '#'),)
+          ('Jinja2', 'http://jinja.pocoo.org/'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
+SOCIAL = (('Submissions', '/submissions.html'),
           ('Another social link', '#'),)
 
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True
 
 STATIC_PATHS = ['images']
 THEME = "/home/trusty/projects/galleria/documentation/pelican_theme/bootstrap2H3"

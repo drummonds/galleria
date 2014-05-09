@@ -1,10 +1,20 @@
 Title: Phase 1 Overview
-URL:
+URL: phase-1.html
+SAVE_AS: phase-1.html
 Date: 2014-05-09 12:28
 Category: Development
 
-Phase 1 is to cover this part of the website.
+Phase 1 is to cover this part of the website except the contact pages.
+This part of the project is meant to be a qualifier for work on later stages.
 
 ![Phase 1 image][]
 
-[Phase 1 image]: ({filename}/images/sitemap1.png)
+[Phase 1 image]: images/sitemap1.png
+
+We need to build a schematic front page - this could use either a static web page or image with an active login button to take you through the login process.    
+Registration and confirmation are not part of this at the moment but will be in the future.  
+Then you need to edit the contact types.  This is a single table and ideally show in placed editing using some type of grid. 
+
+The contact type model is shown below:
+ 
+#todo
