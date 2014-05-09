@@ -18,14 +18,14 @@ TRANSLATION_FEED_ATOM = None
 
 # Blogroll
 LINKS =  (('Galleria homepage','https://github.com/drummonds/galleria'),
-          ('Phase 1','/phase-1.html'),
+          ('Phase 1','http://drummonds.github.io/galleria/phase-1.html'),
           ('Pelican', 'http://getpelican.com/'),
 	  ("Markdown syntax", 'http://daringfireball.net/projects/markdown/syntax'),
           ('Python.org', 'http://python.org/'),
           ('Jinja2', 'http://jinja.pocoo.org/'),)
 
 # Social widget
-SOCIAL = (('Submissions', '/submissions.html'),
+SOCIAL = (('Submissions', 'http://drummonds.github.io/galleria/submissions.html'),
           ('Another social link', '#'),)
 
 DEFAULT_PAGINATION = 10

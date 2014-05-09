@@ -6,7 +6,7 @@ Category: Development
 
 ##Phase 1 Inception
 Working Contact types.  See [Phase 1 Details][]
-[Phase 1 Details]:  ({filename}/phase 1.md)
+[Phase 1 Details]:  phase-1.html
 
 ##Phase 2 
 Read only contacts
