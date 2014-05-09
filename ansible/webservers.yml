@@ -3,7 +3,7 @@
 - name: provision webservers
   hosts:  local
   connection: local
-  user: humphrey
+  user: trusty
   gather_facts: false
 
   vars_files:

@@ -1,0 +1,22 @@
+---
+# create docs tasks
+
+# This will run pelican on the marked up documentation to create the
+# static content.  The static content is not included in this branch
+# of git but is included in a seperate orphan branch gh-pages. This
+# is then uploaded to the orphan branch.
+
+- action: shell whoami
+  register: whoami
+  tags:
+    - debug
+
+- name: Get one green light
+  debug: msg="Hi {{ whoami.stdout }}"
+  tags:
+    - debug
+
+- name: build
+  shell: cd pelican && pelican -s pelicanconf.py
+
+

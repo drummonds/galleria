@@ -1,0 +1,14 @@
+---
+# Playbook to create documentation
+- name: Create documentation
+  hosts: local
+  user: trusty
+  connection: local
+  gather_facts: false
+  
+  roles:
+     - create_docs
+ 
+
+
+

@@ -1,0 +1,29 @@
+/* Custom themes for H3s version of bootstrap 2*/
+/*This will style the buttons*/
+.buttonStyle,
+.buttonStyle1,
+.buttonStyle2,
+.buttonStyle3,
+.buttonStyle4 {
+  width: 150px;
+  height: 28px;
+  background: #F6F;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+.buttonStyle1 {
+  background: #9CF;
+}
+.buttonStyle2 {
+  background: #6FF;
+}
+.buttonStyle3 {
+  background: #9F9;
+}
+.buttonStyle4 {
+  background: #FC5;
+}
+/*This should make them change their color when they are hovered*/
+a.buttonStyle:hover {
+  background: #383;
+}
