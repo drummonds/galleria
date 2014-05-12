@@ -45,6 +45,8 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'categories',
+    'contacts',
+    'galleria'
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -62,6 +64,9 @@ ROOT_URLCONF = 'galleria.urls'
 
 WSGI_APPLICATION = 'galleria.wsgi.application'
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -100,3 +105,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
