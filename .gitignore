@@ -3,3 +3,4 @@
 *~
 etc/
 documentation/pelican/output
+local_settings.py
