@@ -1,0 +1,32 @@
+Title: Admin contact types page specification
+URL: page-admin-contact-type.html
+SAVE_AS: page-admin-contact-type.html
+Date: 2014-05-11 12:28
+Category: Specification
+
+[Home][] - [Roadmap][] - [Phase 1][]/[Phase 2][]    
+
+# Description
+The admin contact type page will be a simple one table one column browser and editor which should allow in place editing.
+
+
+# /admin/contact-type
+
+# Model data
+The model will be a single string, Type in phase 1 and derived from  TimeStamp in phase 2.
+
+
+# Description
+![sketch][]
+
+[sketch]: http://drummonds.github.io/galleria/images/admin-contact-type-sketch.png
+
+The best choice will be an in place grid editor which will be reused throughout the later application.
+
+[Home]: http://drummonds.github.io/galleria/index.html
+[Roadmap]: http://drummonds.github.io/galleria/development-roadmap.html
+[Phase 1]: http://drummonds.github.io/galleria/phase-1.html
+[Phase 2]: http://drummonds.github.io/galleria/phase-2.html
+[login]: http://drummonds.github.io/galleria/page-login.html
+[admin]: http://drummonds.github.io/galleria/page-admin.html
+

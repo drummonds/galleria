@@ -1,0 +1,33 @@
+Title: Home page specification
+URL: page-home.html
+SAVE_AS: page-home.html
+Date: 2014-05-11 12:28
+Category: Specification
+
+[Home][] - [Roadmap][] - [Phase 1][]  
+
+# Description
+The home page will be the master control page for the application and give an overview of the application for that user.  
+
+It will also have to have a good navigation framework to allow the site to grow.
+
+
+# /home
+
+# Description
+![sketch][]
+
+[sketch]: http://drummonds.github.io/galleria/images/home-sketch.png
+
+On clicking the admin button you should be taken to the [admin][] screen.
+
+On clicking the logout button you should be de-authorised and taken to the [login][] screen.
+
+There is a lot more functionality that will be present in phase 2,3.  The main page need be no more than a holding image.
+
+[Home]: http://drummonds.github.io/galleria/index.html
+[Roadmap]: http://drummonds.github.io/galleria/development-roadmap.html
+[Phase 1]: http://drummonds.github.io/galleria/phase-1.html
+[login]: http://drummonds.github.io/galleria/page-login.html
+[admin]: http://drummonds.github.io/galleria/page-admin.html
+

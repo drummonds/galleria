@@ -1,7 +1,7 @@
 Title: Welcome to galleria - the open source gallery software
-URL:
+URL: index.html
 save_as: index.html
-Date: 2014-05-09 12:28
+Date: 2014-05-12 09:23
 
 galleria
 ========
@@ -27,4 +27,18 @@ Enjoy as they say across the water!
 Status:
 V 0.0.0 This is at inception.
 
+#Documentation guides
+
+The documentation breaks down into the following sections:
+
+  1. [Development Roadmap and specifications][]
+  1. [Deployment][]
+  1. [Documentation production][]
+  1. [Guidance for collaborators][]
+
+
+[Development Roadmap and specifications]: http://drummonds.github.io/galleria/development-roadmap.html
+[Deployment]: http://drummonds.github.io/galleria/deployment.html
+[Documentation production]: http://drummonds.github.io/galleria/document-production.html
+[Guidance for collaborators]: http://drummonds.github.io/galleria/submissions.html
 

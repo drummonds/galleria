@@ -2,7 +2,9 @@ Title: Phase 1 Overview
 URL: phase-1.html
 SAVE_AS: phase-1.html
 Date: 2014-05-09 12:28
-Category: Development
+Category: Specification
+
+[Home][] - [Roadmap][] 
 
 Phase 1 is to cover this part of the website except the contact pages.
 This part of the project is meant to be a qualifier for work on later stages.
@@ -11,10 +13,27 @@ This part of the project is meant to be a qualifier for work on later stages.
 
 [Phase 1 image]: http://drummonds.github.io/galleria/images/sitemap1.png
 
-We need to build a schematic front page - this could use either a static web page or image with an active login button to take you through the login process.    
-Registration and confirmation are not part of this at the moment but will be in the future.  
+The following pages need to be built:
+
+
+ * [Public login page][] Registration and confirmation are not part of this at the moment but will be in the future.  
+ * [Public login form page][] Login page  
+ * [Home page][] Framework for central part of application.  
+ * [Admin page][] Admin information page.  
+ * [Admin contact types page][] Edit a single table.  
+
+
 Then you need to edit the contact types.  This is a single table and ideally show in placed editing using some type of grid. 
 
 The contact type model is shown below:
  
 #todo
+
+[Home]: http://drummonds.github.io/galleria/index.html
+[Roadmap]: http://drummonds.github.io/galleria/development-roadmap.html
+[Public login page]: http://drummonds.github.io/galleria/page-login.html
+[Public login form page]: http://drummonds.github.io/galleria/page-login-form.html
+[Home page]: http://drummonds.github.io/galleria/page-home.html
+[Admin page]: http://drummonds.github.io/galleria/page-admin.html
+[Admin contact types page]: http://drummonds.github.io/galleria/page-admin-contact-type.html
+

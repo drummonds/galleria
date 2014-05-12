@@ -16,7 +16,9 @@
   tags:
     - debug
 
-- name: build
+- name: build pelican
   shell: cd pelican && pelican -s pelicanconf.py
 
+#- name: copy icon files to root web output directory (gh-pages branch)
+#  shell: cp pelican/icons/* ../../{{ project_name  }}_docs
 

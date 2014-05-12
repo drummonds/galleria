@@ -1,0 +1,27 @@
+Title: Login form page specification
+URL: page-login-form.html
+SAVE_AS: page-login-form.html
+Date: 2014-05-11 12:28
+Category: Specification
+
+[Home][] - [Roadmap][] - [Phase 1][]  
+
+# Description
+The login form will either be a seperate page or a box on the login screen.  By entering your ID and password which will be checked against the user interface it will authenticate that session and give access to all protected content.
+
+# URL to be decided
+
+# Description
+![sketch][]
+
+[sketch]: http://drummonds.github.io/galleria/images/login-form-sketch.png
+
+On clicking the login button you should be authorised and taken to the [home][] screen.
+
+The forgot password is not planned to be active in phase 1.
+
+[Home]: http://drummonds.github.io/galleria/index.html
+[Roadmap]: http://drummonds.github.io/galleria/development-roadmap.html
+[Phase 1]: http://drummonds.github.io/galleria/phase-1.html
+[home]: http://drummonds.github.io/galleria/page-home.html
+

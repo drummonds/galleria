@@ -1,5 +1,5 @@
 """
-Django settings for django_test project.
+Django settings for galleria project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -58,9 +58,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'django_test.urls'
+ROOT_URLCONF = 'galleria.urls'
 
-WSGI_APPLICATION = 'django_test.wsgi.application'
+WSGI_APPLICATION = 'galleria.wsgi.application'
 
 
 # Database
@@ -74,7 +74,7 @@ DATABASE_PASSWORD = 'z7Mf-gFDr-iCgh-FMGy-XyKW'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_test_db',
+        'NAME': 'galleria_db',
         'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASSWORD,
         'HOST' : DATABASE_HOST,

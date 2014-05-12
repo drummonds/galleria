@@ -5,6 +5,9 @@
   user: trusty
   connection: local
   gather_facts: false
+
+  vars_files:
+    - ../ansible/vars.yml
   
   roles:
      - create_docs

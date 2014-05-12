@@ -1,0 +1,31 @@
+Title: Login page specification
+URL: page-login.html
+SAVE_AS: page-login.html
+Date: 2014-05-11 12:28
+Category: Specification
+
+[Home][] - [Roadmap][] - [Phase 1][]  
+
+
+
+# Description
+The login page is a static landing page.  It has a background image.
+
+# URL \ 
+
+# Description
+![sketch][]
+
+[sketch]: http://drummonds.github.io/galleria/images/login-sketch.png
+
+On clicking the login button you should be taken to the [login form][] screen.
+
+# To be defined
+The source of the name of the image.
+Dealing with the image to make
+
+[Home]: http://drummonds.github.io/galleria/index.html
+[Roadmap]: http://drummonds.github.io/galleria/development-roadmap.html
+[Phase 1]: http://drummonds.github.io/galleria/phase-1.html
+[login form]: http://drummonds.github.io/galleria/page-login-form.html
+
