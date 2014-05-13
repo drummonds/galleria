@@ -1,7 +1,42 @@
-Title: Deployment to EC2
+Title: Deployment
 URL: deployment.html
 SAVE_AS: deployment.html
 Date: 2014-05-09 12:28
+
+#Deployment
+
+This covers the following cases:
+
+  1. Deployment to EC2 (development,staging or production)
+  1. Deployment to local environment
+  1. Initial deployment
+
+# Summary of top level ansible playbooks
+
+### in ansible
+Top level:
+  * infrastructure.yml  provision and deploy to AWS EC2 
+  * web_infrastructure.yml Assume DB ok, provision and deplou webservers to AWS EC2
+  * docs_provider.yml Provision local machine as a document provider
+  * local.yml  Provision local machine for development eg database and virtual environment.
+
+Detail 
+  * webservers.yml provision Web servers in EC2
+  * dbservers.yml Provision DB servers in EC2
+  * configure_webservers.yml Configure webservers in EC2
+  * vars.yml Local variables
+
+Inventory files
+  * development
+
+### in documentation
+
+  * create_docs.yml  See [document production][]
+
+
+[document production]: http://drummonds.github.io/galleria/document-production.html
+
+# Deployment to EC2
 
 # 1 Install software on a Linux machine
 To deploy you need a linux machine with ansible installed.  The project needs to be deployed from github
@@ -32,5 +67,14 @@ The net result should look something like this diagram:
 
 [Deployment overview]: http://drummonds.github.io/galleria/images/deployment-overview.png
 
+# Deployment to local environment
 
+````
+ansible-playbook -i development local.yml
+````
+
+
+# Initial deployment
 I will be trying to simplify this process with an iPython notebook that will do it all for you.
+
+# Deployment to EC2

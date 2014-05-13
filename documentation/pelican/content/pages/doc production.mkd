@@ -10,7 +10,7 @@ The documentation is produced by pelican inside the project and then the output 
 It is important that the two branches are always kept seperarate as there is not commonality between them.
 
 #Setting up the document
-There is an ansible playbook to setup up a devleopment server for documentation.  This creates a virtual environment although does not yet creat the documentation project,
+There is an ansible playbook to setup up on the local server for documentation.  This creates a virtual environment although does not yet create the documentation project:
 
 ````
 ansible-playbook -i development docs_provider.yml --sudo-ask-pass

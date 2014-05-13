@@ -71,10 +71,10 @@ TEMPLATE_DIRS = (
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASE_HOST = '127.0.0.1'
-DATABASE_PORT = ''
-DATABASE_USER = 'django'
-DATABASE_PASSWORD = 'z7Mf-gFDr-iCgh-FMGy-XyKW'
+DATABASE_HOST = 'django-test.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
+DATABASE_PORT = 3306
+DATABASE_USER = 'postgres'
+DATABASE_PASSWORD = 'K4B9-RUrg-bao9-osUb-77Ur'
 
 DATABASES = {
     'default': {

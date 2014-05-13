@@ -1,0 +1,66 @@
+---
+# create database on local machine
+# Todo this needs to be abstracted with very similar code in deploy webservers
+
+- action: shell whoami
+  register: whoami
+  tags:
+    - debug
+
+- name: Get one green light
+  debug: msg="Hi {{ whoami.stdout }}"
+  tags:
+    - debug
+
+# Maker sure postgres installed setup
+
+- name: Install required system packages for Python 3
+  action: apt pkg={{item}} state=installed update-cache=yes
+  sudo: yes
+  with_items:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+
+#  First connect the database
+
+- name: Connect database endpoint to django
+  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_HOST" 
+    line="DATABASE_HOST = '{{ database_endpoint }}'"
+
+- name: set database port for django
+  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_PORT" 
+    line="DATABASE_PORT = 3306"
+
+- name: set database user for django
+  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_USER" 
+    line="DATABASE_USER = 'postgres'"
+
+- name: set database user for django
+  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    regexp="^DATABASE_PASSWORD" 
+    line="DATABASE_PASSWORD = '{{ database_password }}'"
+    
+- name: Create a new Django database with standard name 
+  postgresql_db: name={{project_name}}_db
+    encoding='UTF-8'
+    login_host=127.0.0.1
+    port=5432
+    login_user=postgres
+    login_password={{  database_password  }}
+
+- name: Sync Django database.
+  django_manage: >
+    command=syncdb
+    app_path=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}
+    virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}     
+    
+- name: migrate django database. may need to do by app
+  django_manage: >
+    command=migrate
+    app_path=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}
+    virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}     
+

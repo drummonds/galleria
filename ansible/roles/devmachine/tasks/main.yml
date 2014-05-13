@@ -1,0 +1,56 @@
+---
+# devmachine tasks
+
+# This will set up a local machine for development with the right
+# version of python and environment for development
+# Requirements.  A development machine with the repository downloaded.
+
+- action: shell whoami
+  register: whoami
+  tags:
+    - debug
+
+# Python 3 setup
+
+- name: Install required system packages for Python 3 in main environment
+  action: apt pkg={{item}} state=installed update-cache=yes
+  sudo: yes
+  with_items:
+    - python3
+    - python3-dev
+    - python3-setuptools
+
+- name: Install required easy install Python 3 packages.
+  action: shell easy_install3 {{ item  }}
+  with_items: 
+    - pip
+  sudo: yes
+
+- name: Pip nstall required packages in main environmet
+  action: pip name={{ item  }}
+  with_items: 
+    - psycopg2
+    - virtualenv
+  sudo: yes
+
+# Now create the virtual environment
+- name: "Create virtualenv"
+  shell: virtualenv --python=/usr/bin/python3.4 "/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}"
+         creates="/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}/bin/activate"
+
+  # Setup the virtualenvwrapper
+- name: export work for virtual env wrapper
+  lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
+    line="export WORKON_HOME=$HOME/.virtualenvs"
+
+- name: enable shell script
+  lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
+    line="source /usr/local/bin/virtualenvwrapper.sh"
+
+- name: ensure required packages are installed.
+  sudo: yes
+  action: pip 
+    requirements=/home/{{ whoami.stdout }}/projects/{{ project_name }}/requirements/local.txt virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }} virtualenv_command=virtualenv-3.4
+
+
+

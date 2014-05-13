@@ -14,7 +14,7 @@
     owner={{ usr }} group={{ usr }}
     
 - name: Git clone
-  git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/django_test.git
+  git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
     dest=/home/ubuntu/projects/{{ project_name }}
     accept_hostkey=True 
 
@@ -173,7 +173,7 @@
     line="DATABASE_PASSWORD = '{{ database_password }}'"
     
 - name: Create a new Django database with standard name 
-  postgresql_db: name=django_test_db
+  postgresql_db: name={{ project_name }}_db
     encoding='UTF-8'
     login_host={{ database_endpoint }}
     port=3306

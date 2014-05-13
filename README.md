@@ -1,4 +1,4 @@
-galleria
+[galleria][]
 ========
 
 Open source software to run galleries and artists web sites.  This project is designed to setout an open source software for running Art gallerys, commissioning art galleries and artist marketing sites.

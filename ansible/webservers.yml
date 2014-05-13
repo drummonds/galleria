@@ -1,5 +1,5 @@
 ---
-# Play to provision instances
+# Play to provision instances on EC2
 - name: provision webservers
   hosts:  local
   connection: local

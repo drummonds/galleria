@@ -3,8 +3,7 @@ URL: index.html
 save_as: index.html
 Date: 2014-05-12 09:23
 
-galleria
-========
+#galleria
 
 Open source software to run galleries and artists web sites.  This project is designed to setout an open source software for running Art gallerys, commissioning art galleries and artist marketing sites.
 
@@ -16,9 +15,9 @@ It will have a number of modules to cover the normal operations:
 - website building
 - artist portfolio management
 
+Information
 
 The software is available dual licensed under a permissive Apache license and also commerically licensed through drummonds.net.  Drummonds.net will be running and supporting the software commercially for those that need it.
-
 
 The technology platform is based around Django and a Javascript JQuery front end.
 
@@ -27,14 +26,23 @@ Enjoy as they say across the water!
 Status:
 V 0.0.0 This is at inception.
 
-#Documentation guides
-
 The documentation breaks down into the following sections:
 
+## For users
+To be written.  Mostly should be self explanatory.
+
+## For developers
   1. [Development Roadmap and specifications][]
-  1. [Deployment][]
-  1. [Documentation production][]
   1. [Guidance for collaborators][]
+
+## For documentation
+  1. [Documentation production][]
+
+## For system admins
+
+  1. [Deployment][]
+
+
 
 
 [Development Roadmap and specifications]: http://drummonds.github.io/galleria/development-roadmap.html

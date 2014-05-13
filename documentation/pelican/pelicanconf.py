@@ -17,7 +17,7 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
-LINKS =  (('Galleria homepage','https://github.com/drummonds/galleria'),
+LINKS =  (('Galleria GitHub home','https://github.com/drummonds/galleria'),
           ('Phase 1','http://drummonds.github.io/galleria/phase-1.html'),
           ('Pelican', 'http://getpelican.com/'),
 	  ("Markdown syntax", 'http://daringfireball.net/projects/markdown/syntax'),

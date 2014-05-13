@@ -2,3 +2,5 @@ Django==1.6.3
 South==0.8.4
 boto==2.27.0
 psycopg2==2.5.2
+django-model-utils==2.0.3
+

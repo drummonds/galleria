@@ -1,0 +1,19 @@
+---
+# Playbook to deploy to the local machine
+- name: deploy locally
+  hosts: local
+  user: trusty
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - ../../personal.yml
+    - vars.yml
+
+  roles:
+     - devmachine
+     - postgres
+ 
+
+
+

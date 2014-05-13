@@ -201,8 +201,8 @@ class Contact(TimeStampedModel):
 #     g__Search          text ,
 #     g__Note            text ,
 #     User_2             text
-);
 
-class ContactNote(TimeStampeModel):
+class ContactNote(TimeStampedModel):
     contact = models.ForeignKey(Contact)
-    Notes = model.charField()
+    Notes = models.TextField()
+
