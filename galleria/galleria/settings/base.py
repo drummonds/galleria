@@ -19,11 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '5rg#+%$#&c@q6#5r=u^ji0q9&&+5*v(r5wd)y(autnmz5n0bd%'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -71,7 +66,7 @@ TEMPLATE_DIRS = (
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASE_HOST = 'django-test.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
+DATABASE_HOST = 'galleria.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
 DATABASE_PORT = 3306
 DATABASE_USER = 'postgres'
 DATABASE_PASSWORD = 'K4B9-RUrg-bao9-osUb-77Ur'

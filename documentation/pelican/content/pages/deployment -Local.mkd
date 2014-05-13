@@ -1,0 +1,26 @@
+Title: Deployment
+URL: deployment-local.html
+SAVE_AS: deployment-local.html
+Date: 2014-05-13 21:45
+
+
+# Deployment to local environment
+
+The [initial deployment][] has been complete and now you want to actually deploy to a local machine.
+
+[initial deployment]: http://drummonds.github.io/galleria/images/deployment-intial.html
+
+Make sure the machine is setup up for the local environment.  So from a terminal in the directory 
+`~/projects/galleria/ansible` run the following command:
+
+````
+ansible-playbook -i local local.yml
+````
+
+Then to get the machine running, from this directory `~/projects/galleria/galleria` run the following command (making sure there is nothing on port 8000):
+
+````
+workon galleria
+python manage.py runserv 0.0.0.0:8000 --settings=galleria.settings.local
+````
+

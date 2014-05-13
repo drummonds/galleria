@@ -1,0 +1,43 @@
+Title: Deployment to EC2
+URL: deployment-ec2.html
+SAVE_AS: deployment-ec2.html
+Date: 2014-05-13 20:52
+
+# Deployment to EC2
+
+Requirements:
+ * You should have completed the [deployment to a develoment machine][].
+
+[deployment to a develoment machine]:  http://drummonds.github.io/galleria/images/deployment-intial.html
+
+## 1 Install software on a Linux machine
+To deploy you need a linux machine with ansible installed.  The project needs to be deployed from github
+
+````
+git clone xxx
+````
+
+In the project above you need to setup the private file as documented in ansible/files/private.yml.  You also need to setup an SSH keypair, private to you for managing you EC2 instances and export your key and private key as environment variables.
+
+## 2 Deploy to EC2
+
+Then the following should setup a working instance in EC2.  Automatic inventory management is not yet implemented so.  Before you do this you will need to check the inventory file  ansible/development and make sure any webservers that have previously been added are removed.  The ansible script will still run but give you fail messages for all the servers that don't exist.
+
+````
+ansible-playbook -i development infrastructure.yml
+````
+
+You can then browse to the public IP address and see the state of development.
+
+#Don't forget to kill them by hand as Amazon will charge you for running.
+
+Use the AWS management console.
+
+The net result should look something like this diagram:
+
+![Deployment overview][]
+
+[Deployment overview]: http://drummonds.github.io/galleria/images/deployment-overview.png
+
+
+

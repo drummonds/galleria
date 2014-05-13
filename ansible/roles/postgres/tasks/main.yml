@@ -22,28 +22,7 @@
     - libpq-dev
     - python-psycopg2
 
-#  First connect the database
-
-- name: Connect database endpoint to django
-  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
-    regexp="^DATABASE_HOST" 
-    line="DATABASE_HOST = '{{ database_endpoint }}'"
-
-- name: set database port for django
-  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
-    regexp="^DATABASE_PORT" 
-    line="DATABASE_PORT = 3306"
-
-- name: set database user for django
-  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
-    regexp="^DATABASE_USER" 
-    line="DATABASE_USER = 'postgres'"
-
-- name: set database user for django
-  lineinfile: dest=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
-    regexp="^DATABASE_PASSWORD" 
-    line="DATABASE_PASSWORD = '{{ database_password }}'"
-    
+# TODO Duplication with Django settings which should be resolved
 - name: Create a new Django database with standard name 
   postgresql_db: name={{project_name}}_db
     encoding='UTF-8'
@@ -56,7 +35,10 @@
   django_manage: >
     command=syncdb
     app_path=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}
-    virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}     
+    virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}
+    settings={{ project_name }}.settings.{{ deploy_file }}
+  tags:
+    - debug
     
 - name: migrate django database. may need to do by app
   django_manage: >

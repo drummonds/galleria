@@ -21,4 +21,4 @@ local
 
 [all:vars]
 deploy_file=development
-database_endpoint=django-test.cpgyypvjajxe.eu-west-1.rds.amazonaws.com
+database_endpoint=galleria.cpgyypvjajxe.eu-west-1.rds.amazonaws.com

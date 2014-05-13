@@ -27,7 +27,7 @@
   # The db.t1.micro is slow to start at about 4-500 seconds
   - rds: >
       command=create
-      instance_name=django-test
+      instance_name={{ project_name }}
       db_engine=postgres
       size=10
       instance_type=db.t1.micro

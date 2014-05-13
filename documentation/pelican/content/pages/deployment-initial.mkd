@@ -1,0 +1,18 @@
+Title: Deployment
+URL: deployment-initial.html
+SAVE_AS: deployment-initial.html
+Date: 2014-05-13 21:45:28
+
+# Initial deployment
+
+This covers starting from a clean machine and installing all the bits you need.
+
+So:
+
+ 1. Clean install of Ubuntu 14.04
+
+
+I will be trying to simplify this process with an iPython notebook that will do it all for you.
+
+
+

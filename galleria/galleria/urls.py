@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import HomeView, LoginView, LogOut
+from .views import HomeView, LoginView, LogOut
 
 from django.contrib import admin
 admin.autodiscover()

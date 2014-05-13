@@ -1,0 +1,23 @@
+# Local Inventory file
+
+[webservers]
+127.0.0.1
+
+[dbservers]
+127.0.0.1
+
+[launched]
+
+[local]
+127.0.0.1
+
+[all:children]
+webservers
+dbservers
+launched
+local
+
+[all:vars]
+deploy_file=local
+database_endpoint=127.0.0.1
+

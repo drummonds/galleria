@@ -1,4 +1,4 @@
-import urlparse
+import urllib
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -37,7 +37,7 @@ class LoginView(FormView):
             return self.form_invalid(form)
 
     def form_invalid(self, form):
-        print form
+        print(form)
         return HttpResponseRedirect(reverse('login'))
 
     def get_success_url(self):
@@ -46,7 +46,7 @@ class LoginView(FormView):
         else:
             redirect_to = self.request.REQUEST.get(self.redirect_field_name, '')
 
-        netloc = urlparse.urlparse(redirect_to)[1]
+        netloc = urllib.parse(redirect_to)[1]
         if not redirect_to:
             redirect_to = settings.LOGIN_REDIRECT_URL
         elif netloc and netloc != self.request.get_host():

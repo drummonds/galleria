@@ -206,3 +206,9 @@ class ContactNote(TimeStampedModel):
     contact = models.ForeignKey(Contact)
     Notes = models.TextField()
 
+class ContactType(models.Model):
+    name = models.CharField(max_length=255, null=False, blank=False)
+
+    def __str__(self):
+        return("{}".format(self.name))
+
