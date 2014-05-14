@@ -68,7 +68,7 @@ TEMPLATE_DIRS = (
 
 DATABASE_HOST = 'galleria.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
 DATABASE_PORT = 3306
-DATABASE_USER = 'postgres'
+DATABASE_USER = 'postgres_admin'
 DATABASE_PASSWORD = 'K4B9-RUrg-bao9-osUb-77Ur'
 
 DATABASES = {

@@ -31,7 +31,7 @@
       db_engine=postgres
       size=10
       instance_type=db.t1.micro
-      username=postgres
+      username=postgres_admin
       security_groups={{ db_security_group}}
       region={{ region }}
       password={{ database_password }}

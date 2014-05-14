@@ -28,7 +28,7 @@
     encoding='UTF-8'
     login_host=127.0.0.1
     port=5432
-    login_user=postgres
+    login_user=postgres_admin
     login_password={{  database_password  }}
 
 - name: Sync Django database.
