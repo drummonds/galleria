@@ -13,7 +13,7 @@ It will have a number of modules to cover the normal operations:
 
 For more information see the linked website [galleria][].  This has information on the current status and how to contribute.
 
-[galleria]: http://drummonds.github.io/galleria/index.html
+[galleria]: https://github.com/drummonds/galleria/wiki
 
 
 
