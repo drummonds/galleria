@@ -165,7 +165,7 @@
 - name: set database user for django
   lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^DATABASE_USER" 
-    line="DATABASE_USER = 'postgres_admin'"
+    line="DATABASE_USER = 'postgres'"
 
 - name: set database user for django
   lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
@@ -177,7 +177,7 @@
     encoding='UTF-8'
     login_host={{ database_endpoint }}
     port=3306
-    login_user=postgres_admin
+    login_user=postgres
     login_password={{  database_password  }}
 
 - name: Sync Django database.

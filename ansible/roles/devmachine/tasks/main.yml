@@ -26,7 +26,13 @@
     - pip
   sudo: yes
 
-- name: Pip nstall required packages in main environmet
+- name: Install required easy install Python packages.
+  action: shell easy_install {{ item  }}
+  with_items: 
+    - pip
+  sudo: yes
+
+- name: Pip install required packages in main environment
   action: pip name={{ item  }}
   with_items: 
     - psycopg2
