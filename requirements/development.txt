@@ -1,2 +1,2 @@
 -r base.txt # Include the base.txt requirements
-
+django-debug-toolbar==1.2

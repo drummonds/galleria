@@ -153,22 +153,22 @@
 #  First connect the database
 
 - name: Connect database endpoint to django
-  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^DATABASE_HOST" 
     line="DATABASE_HOST = '{{ database_endpoint }}'"
 
 - name: set database port for django
-  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^DATABASE_PORT" 
     line="DATABASE_PORT = 3306"
 
 - name: set database user for django
-  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^DATABASE_USER" 
     line="DATABASE_USER = 'postgres_admin'"
 
 - name: set database user for django
-  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+  lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^DATABASE_PASSWORD" 
     line="DATABASE_PASSWORD = '{{ database_password }}'"
     
@@ -185,16 +185,18 @@
     command=syncdb
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    settings={{ project_name }}.settings.{{ deploy_file }}
     
 - name: migrate django database. may need to do by app
   django_manage: >
     command=migrate
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    settings={{ project_name }}.settings.{{ deploy_file }}
     
 - name: add static root to settings file
   lineinfile: >
-    dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings.py
+    dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^STATIC_ROOT"
     line="STATIC_ROOT = '/home/ubuntu/projects/{{ project_name }}/static/'"
     
@@ -203,6 +205,7 @@
     command=collectstatic
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    settings={{ project_name }}.settings.{{ deploy_file }}
     
 - name: Install nginx 
   include: nginx.yml
