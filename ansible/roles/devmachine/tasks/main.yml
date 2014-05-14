@@ -22,6 +22,7 @@
     - postgresql
     - libpq-dev
     - python-dev
+    - pgadmin3
 
 - name: Install required easy install Python 3 packages.
   action: shell easy_install3 {{ item  }}
@@ -34,6 +35,7 @@
   with_items: 
     - psycopg2
     - virtualenv
+    - virtualenvwrapper
   sudo: yes
 
 # Now create the virtual environment
@@ -42,6 +44,10 @@
          creates="/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}/bin/activate"
 
   # Setup the virtualenvwrapper
+- name: Shell profile comment for virtual env wrapper
+  lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
+    line="# needed for virtualenvwrapper"
+
 - name: export work for virtual env wrapper
   lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
     line="export WORKON_HOME=$HOME/.virtualenvs"

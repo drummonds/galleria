@@ -14,7 +14,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DATABASE_HOST = '127.0.0.1'
 DATABASE_PORT = 5432
 DATABASE_USER = 'postgres_admin'
-DATABASE_PASSWORD = 'K4B9-RUrg-bao9-osUb-77Ur'
+DATABASE_PASSWORD = '0123-4567-890A-BCDE-FGHI'
 
 DATABASES = {
     'default': {
