@@ -46,7 +46,7 @@ class LoginView(FormView):
         else:
             redirect_to = self.request.REQUEST.get(self.redirect_field_name, '')
 
-        netloc = urllib.parse(redirect_to)[1]
+        netloc = urllib.parse.urlparse(redirect_to)[1]
         if not redirect_to:
             redirect_to = settings.LOGIN_REDIRECT_URL
         elif netloc and netloc != self.request.get_host():
