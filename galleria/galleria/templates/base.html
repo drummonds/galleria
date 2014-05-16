@@ -1,3 +1,4 @@
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,14 +17,29 @@
     <link rel="apple-touch-icon" sizes="72x72" href="./images/icons/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="./images/icons/apple-touch-icon-114x114.png">
 
+    {% bootstrap_css %} 
+    <script src="{% bootstrap_jquery_url %}"></script>
+    {% bootstrap_javascript %}
+
   </head>
 
   <body>
-    {% if user.is_authenticated %}
-        {% block content %}{% endblock content %}
-    {% else %}
-        {% block login %}{% endblock login %}
-    {% endif %}
+    <nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      {% if request.user.is_anonymous %}
+            <li><a href="#">Not logged in.</a></li>
+            <li><a href="{% url 'login' %}">Log in</a></li>
+      {% else %}
+            <li><a href="#">Logged in as {{ request.user.username }}.</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% endif %}
+      </ul>
+  </div>
+ </nav>
+    <div class="container container-fluid">
+    {% block content %}{% endblock content %}
+    </div>
 
     {% block js %}{% endblock js %}
   </body>
