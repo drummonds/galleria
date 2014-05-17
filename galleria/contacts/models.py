@@ -4,203 +4,116 @@ from model_utils.models import TimeStampedModel
 # Create your models here.
 
 class Contact(TimeStampedModel):
-    # CreationUserName   text , --  FM System Field
-    # CreationUserAccountName   text , --  FM System Field
-    # ModificationUser   text , --  FM System Field
-    # ModificationUserAccountName   text , --  FM System Field
     Name_First = models.CharField(max_length=100)
     Name_Last  = models.CharField(max_length=100)
 
-
-#     gText02            text ,
-#     gText03            text ,
-#     gNum01             decimal(15) ,
-#     gNum02             decimal(15) ,
-#     gNum03             decimal(15) ,
-#     Name_Title         text ,
-#     Name_Full_c        text ,
-#     Job_Title          text ,
-#     Type               text ,
-#     Status             text ,
-#     Department         text ,
-#     DateOfBirth        date ,
-#     Partner            text ,
-#     KF_Organisation    text ,
-#     Notes              text ,
-#     PreferredContactMethod   text ,
-#     MarketingIncludeMail   decimal(15) ,
-#     Referral_Info      text ,
-#     MarketingTempReqd   decimal(15) ,
-#     MarketingSelectedEmail   text ,
-#     SalutationType     text ,
-#     SalutationCalc     text ,
-#     MarketingIncludeEMail   decimal(15) ,
-#     MarketingPostTempInclude   decimal(15) ,
-#     MarketingEmailTempInclude   decimal(15) ,
-#     SalutationName     text ,
-#     EMailAddressChosen   text ,
-#     EmailValidation    text ,
-#     MarkDeletion       text ,
-#     MarkArchive        text ,
-#     DeleteArchive      text ,
-#     z__Constant_c      decimal(15) ,
-#     z__Constant_cg     decimal(15) ,
-#     Company            text ,
-#     Identifier_Individual   decimal(15) ,
-#     Identifier_Company   decimal(15) ,
-#     Tel_Company        text ,
-#     Fax_Company        text ,
-#     URL                text ,
-#     c__Phone           text ,
-#     c__Fax             text ,
-#     c__Email           text ,
-#     Address_Company_Include   text ,
-#     Address_Individual_Include   text ,
-#     Discount           decimal(15) ,
-#     Age                decimal(15) ,
-#     g__Filter_JobType   text ,
-#     Tel_Numbers_Extra_c   decimal(15) ,
-#     Addresses_Extra_c   decimal(15) ,
-#     Address_Contact_Include   text ,
-#     Address_Display_c   text ,
-#     g__Similar_Type    text ,
-#     PortalFilterKeyChild   text ,
-#     g__Class           text ,
-#     Terms              text ,
-#     VAT_Rate           decimal(15) ,
-#     Account_Num        decimal(15) ,
-#     Deposit            decimal(15) ,
-#     Display_Client     text ,
-#     Children           text ,
-#     g__Class_Copy      text ,
-#     g__Job             text ,
-#     g__Quote           text ,
-#     Audit_FieldData    text ,
-#     Audit_Log          text ,
-#     Search_c           text ,
-#     Name_Title_Include   text ,
-#     Name_Middle        text ,
-#     Name_Suffix        text ,
-#     Name_Middle_Include   text ,
-#     Name_Suffix_Include   text ,
-#     Job_Title_Include   text ,
-#     Department_Include   text ,
-#     Categories         text ,
-#     Categories_One_Line   text ,
-#     Address_Business_1   text ,
-#     Address_Business_2   text ,
-#     Address_Business_3   text ,
-#     Address_Business_City   text ,
-#     Address_Business_County_State   text ,
-#     Address_Business_Post_Code   text ,
-#     Address_Business_Country   text ,
-#     Address_Home_1     text ,
-#     Address_Home_2     text ,
-#     Address_Home_3     text ,
-#     Address_Home_City   text ,
-#     Address_Home_County_State   text ,
-#     Address_Home_Country   text ,
-#     Address_Home_Post_Code   text ,
-#     Address_Other_1    text ,
-#     Address_Other_2    text ,
-#     Address_Other_3    text ,
-#     Address_Other_City   text ,
-#     Address_Other_County_State   text ,
-#     Address_Other_Country   text ,
-#     Address_Other_Postcode   text ,
-#     Phone_Business_Fax   text ,
-#     Phone_Business_1   text ,
-#     Phone_Business_2   text ,
-#     Phone_Home_Fax     text ,
-#     Phone_Home_1       text ,
-#     Phone_Home_2       text ,
-#     Phone_Mobile       text ,
-#     Phone_Other        text ,
-#     Phone_Other_Fax    text ,
-#     Phone_Other_Label   text ,
-#     Phone_Other_Fax_Label   text ,
-#     Phone_Primary      text ,
-#     Birthday           date ,
-#     Email_1            text ,
-#     Email_1_Type       text ,
-#     Email_1_Display    text ,
-#     Email_2            text ,
-#     Email_2_Type       text ,
-#     Email_2_Display    text ,
-#     Initials           text ,
-#     Priority           text ,
-#     Private            text ,
-#     Sensitivity        text ,
-#     Spouse             text ,
-#     Name_Addressed_As   text ,
-#     Address_Main       text ,
-#     Address_Display_c1   text ,
-#     Address_Business_Country_Include   text ,
-#     Name_Addressed_As_Select   text ,
-#     Address_Temp_1     text ,
-#     Address_Temp_2     text ,
-#     Address_Temp_3     text ,
-#     Address_Temp_City   text ,
-#     Address_Temp_County_State   text ,
-#     Address_Temp_Postcode   text ,
-#     Address_Temp_Country   text ,
-#     Temp               text ,
-#     Outlook_ID         text ,
-#     Outlook_Modified   text ,
-#     Outlook_Modified_TS   timestamp ,
-#     Outlook_TS_Temp    timestamp ,
-#     Mark_Deletion      text ,
-#     Outlook_ModificationTimeStamp   timestamp ,
-#     g__Found_Set_IDs   text ,
-#     g__Alphabet        text ,
-#     c__Portal_Filter_Child   text ,
-#     Address_Home_Country_Include   text ,
-#     Address_Other_Country_Include   text ,
-#     Phone_Main_Selector   text ,
-#     Phone_Main_c       text ,
-#     Category_c         text ,
-#     g__Artist_c        text ,
-#     cSort_asc          text ,
-#     cSort_dsc          text ,
-#     Address_Map_c      text ,
-#     Address_Display_c1_Line   text ,
-#     Plugin_Message     text ,
-#     Tab_Hide_ID        decimal(15) ,
-#     Tab_Title          text ,
-#     Tab_Title_2        text ,
-#     Address_Only_Line_c   text ,
-#     Address_City_Selected   text ,
-#     Background         text ,
-#     Background_Trigger   decimal(15) ,
-#     Display_Address_Email   text ,
-#     Display_Address_Email_Checkbox   text ,
-#     g__Marketing_Type   text ,
-#     Email_1_Validation   decimal(15) ,
-#     Address_Selected   decimal(15) ,
-#     Address_Only_c     text ,
-#     Fax_Main_c         text ,
-#     KF__Categories     text ,
-#     Type_Trigger       text ,
-#     Email_3            text ,
-#     Email_3_Type       text ,
-#     Email_3_Display    text ,
-#     g__Filter          text ,
-#     Display_Deletion_Message   text ,
-#     KF__Outlook_Contacts_Folder   decimal(15) ,
-#     g__Filter_Outlook_Folder   text ,
-#     Outlook_Contacts_Folder   text ,
-#     Cats_Count         decimal(15) ,
-#     g__Cats_Match      text ,
-#     g__Cats_Match_LU   text ,
-#     RecordDisplayList   text ,
-#     g__Filter_Contact_List   text ,
-#     g__Filter_Selection_Portal   text ,
-#     Temp_Reversed      text ,
-#     Outlook_ID_Reversed   text ,
-#     Search_Field       text ,
-#     g__Search          text ,
-#     g__Note            text ,
-#     User_2             text
+class contacts(TimeStampedModel):
+    address_city_selected    =models.TextField()
+    address_display_c1    =models.TextField()
+    address_display_c1_line    =models.TextField()
+    address_map_c       =models.TextField()
+    address_only_c      =models.TextField()
+    address_only_line_c    =models.TextField()
+    address_selected    =models.FloatField()
+    c__portal_filter_child    =models.TextField()
+    cats_count          =models.FloatField()
+    display_address_email    =models.TextField()
+    display_address_email_checkbox    =models.TextField()
+    email_1_validation    =models.FloatField()
+    fax_main_c          =models.TextField()
+    identifier_company    =models.FloatField()
+    identifier_individual    =models.FloatField()
+    job_title           =models.TextField()
+    kf__categories      =models.TextField()
+    kf__outlook_contacts_folder    =models.FloatField()
+    kp__contacts        =models.FloatField()
+    marketingemailtempinclude    =models.FloatField()
+    marketingincludeemail    =models.FloatField()
+    marketingposttempinclude    =models.FloatField()
+    name_addressed_as    =models.TextField()
+    name_addressed_as_select    =models.TextField()
+    name_full_c         =models.TextField()
+    outlook_contacts_folder    =models.TextField()
+    outlook_id          =models.TextField()
+    outlook_id_reversed    =models.TextField()
+    outlook_modificationtimestamp    =models.DateTimeField()
+    phone_main_c        =models.TextField()
+    portalfilterkeychild    =models.TextField()
+    recorddisplay       =models.TextField()
+    salutationcalc      =models.TextField()
+    search_c            =models.TextField()
+    search_field        =models.TextField()
+    tab_hide_id         =models.FloatField()
+    tab_title           =models.TextField()
+    type_trigger        =models.TextField() #  address_info
+    address_business_1    =models.TextField() #  address_info
+    address_business_city    =models.TextField() #  address_info
+    address_business_country    =models.TextField() #  address_info
+    address_business_country_include    =models.TextField() #  address_info
+    address_business_county_state    =models.TextField() #  address_info
+    address_business_post_code    =models.TextField() #  address_info
+    address_company_include    =models.TextField() #  address_info
+    address_home_1      =models.TextField() #  address_info
+    address_home_city    =models.TextField() #  address_info
+    address_home_country    =models.TextField() #  address_info
+    address_home_country_include    =models.TextField() #  address_info
+    address_home_county_state    =models.TextField() #  address_info
+    address_home_post_code    =models.TextField() #  address_info:: Manual override for address where logic doesnt work
+    address_mail_override    =models.TextField() #  address_info:: Selector of Business, Home or Other
+    address_main        =models.TextField() #  address_info
+    address_other_1     =models.TextField() #  address_info
+    address_other_city    =models.TextField() #  address_info
+    address_other_country    =models.TextField() #  address_info
+    address_other_country_include    =models.TextField() #  address_info
+    address_other_county_state    =models.TextField() #  address_info
+    address_other_postcode    =models.TextField() #  address_info
+    company             =models.TextField() #  address_info:: ? this is how the client appears in a sorting list
+    display_client      =models.TextField() #  address_info
+    job_title_include    =models.TextField() #  address_info:: About 90% have a first name
+    name_first          =models.TextField() #  address_info:: About 95% have a last name
+    name_last           =models.TextField() #  address_info
+    name_middle         =models.TextField() #  address_info
+    name_middle_include    =models.TextField() #  address_info
+    name_suffix         =models.TextField() #  address_info
+    name_suffix_include    =models.TextField() #  address_info:: About half have a title
+    name_title          =models.TextField() #  address_info:: ? include this title on a mailing list
+    name_title_include    =models.TextField() #  address_info
+    salutationname      =models.TextField() #  address_info
+    salutationtype      =models.TextField() #  address_info
+    url                 =models.TextField() #  categories
+    categories          =models.TextField() #  categories
+    categories_one_line    =models.TextField() #  categories
+    type                =models.TextField() #  commercial
+    referral_info       =models.TextField() #  commercial
+    vat_rate            =models.FloatField() #  email_info
+    email_1             =models.TextField() #  email_info
+    email_1_display     =models.TextField() #  email_info
+    email_1_type        =models.TextField() #  email_info
+    email_2             =models.TextField() #  email_info
+    email_2_display     =models.TextField() #  email_info
+    email_2_type        =models.TextField() #  email_info
+    email_3             =models.TextField() #  email_info
+    email_3_display     =models.TextField() #  marketing_info
+    marketingincludemail    =models.FloatField() #  modification_log
+    creationtimestamp    =models.DateTimeField() #  modification_log
+    creationuseraccountname    =models.TextField() #  modification_log
+    creationusername    =models.TextField() #  modification_log
+    modificationtimestamp    =models.DateTimeField() #  modification_log
+    modificationuser    =models.TextField() #  modification_log
+    modificationuseraccountname    =models.TextField() #  modification_log
+    recordmodificationcount    =models.FloatField() #  notes
+    notes               =models.TextField() #  phone_info
+    phone_business_1    =models.TextField() #  phone_info
+    phone_business_2    =models.TextField() #  phone_info
+    phone_business_fax    =models.TextField() #  phone_info
+    phone_home_1        =models.TextField() #  phone_info
+    phone_home_2        =models.TextField() #  phone_info
+    phone_home_fax      =models.TextField() #  phone_info
+    phone_main_selector    =models.TextField() #  phone_info
+    phone_mobile        =models.TextField() #  phone_info
+    phone_other         =models.TextField() #  phone_info
+    phone_other_fax     =models.TextField() #  row_id
+    currentrecordnumber    =models.FloatField() # row_id
 
 class ContactNote(TimeStampedModel):
     contact = models.ForeignKey(Contact)
