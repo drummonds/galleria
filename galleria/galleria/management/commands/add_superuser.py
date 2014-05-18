@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from optparse import make_option
 
-class Command(BaseCommand)
+class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option('--user',
             action='store',
@@ -19,9 +19,9 @@ class Command(BaseCommand)
         )
 
     def handle(self, *args, **kwargs):
-        user = User.object.create_superuser(
+        superuser = User.objects.create_superuser(
             username = kwargs.get('user'),
-            password = kwargs.get('password'),
-            email = kwargs.get('email')
+            email = kwargs.get('email'),
+            password = kwargs.get('password')
             )
-        user.save()
+        superuser.save()

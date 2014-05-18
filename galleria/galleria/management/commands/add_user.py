@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from optparse import make_option
 
-class Command(BaseCommand)
+class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option('--user',
             action='store',
@@ -19,7 +19,7 @@ class Command(BaseCommand)
         )
 
     def handle(self, *args, **kwargs):
-        user = User.object.create_user(
+        user = User.objects.create_user(
             username = kwargs.get('user'),
             password = kwargs.get('password'),
             email = kwargs.get('email')

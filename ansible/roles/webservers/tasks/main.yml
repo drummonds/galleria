@@ -166,31 +166,55 @@
     login_user=postgres_admin
     login_password={{  database_password  }}
 
+- name: add postgres database file password so that psql can work
+  template: src=pgpass.j2
+    dest="/home/ubuntu/.pgpass"
+  tags:
+    - debug
+
+- name: Make sure permission of Postgres password file correct and it exists
+  file: state=file path=/home/ubuntu/.pgpass
+    owner={{ usr }} group={{ usr }} mode=0600
+  tags:
+    - debug
+
 - name: Sync Django database.
   django_manage: >
     command=syncdb
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
-    settings={{ project_name }}.settings.{{ deploy_file }}
- 
-- name: create superuser
-  django_manage: >
-    command=add_superuser --user=test --password=test
-    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
-    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
-    settings={{ project_name }}.settings.{{ deploy_file }}
+    settings={{ project_name }}.settings.{{ deploy_file }} 
+
+
+# Not yet working if I log in manually and run the command it does work
+#- name: Check to get list of django users Needs a remote connection
+#  command: psql --host={{ database_endpoint }} --dbname={{ project_name }}_db --port=3306 --username=postgres_admin -#c"select username from auth_user;" 
+#  register: django_users_check
+#  tags:
+#    - debug
+
+#Manually run by hand once only
+#- name: create superuser
+#  django_manage: >
+#    command=add_superuser --user=test --password=test --email=test@test.com
+#    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+#    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+#    settings={{ project_name }}.settings.{{ deploy_file }}
+#  when: postgres_users_check.stdout.find('test') == -1
+#  tags:
+#    - debug
   
-
-
 - name: migrate apps
   django_manage: >
-    command=migrate {{item}}
+    command="migrate {{ item }}"
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }}
   with_items:
     - categories
     - contacts
+  tags:
+    - debug
     
 # Django 1.7 version
 #- name: migrate django database. may need to do by app
@@ -216,6 +240,3 @@
 - name: Install nginx 
   include: nginx.yml
 
-# Assuming this is not needed
-#  handlers:
-#    - include: ../handlers/main..yml
