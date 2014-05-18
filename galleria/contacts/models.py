@@ -1,11 +1,39 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
 
-# Create your models here.
+from categories.models import Category
 
 class Contact(TimeStampedModel):
-    Name_First = models.CharField(max_length=100)
-    Name_Last  = models.CharField(max_length=100)
+    type = models.ForeignKey('ContactType')
+    title = models.CharField(max_length=100, blank=True)
+    name_first = models.CharField(max_length=100)
+    name_middle = models.CharField(max_length=100, blank=True)
+    name_last  = models.CharField(max_length=100)
+    suffix = models.CharField(max_length=100, blank=True)
+    addressed_as = models.CharField(max_length=10, choices=(('custom','Custom')), default='custom')
+    addressed_as_custom = models.CharField(max_length=100, blank=True)
+    categories = models.ManyToManyField(Category)
+    reference = models.CharField(max_length=100, blank=True)
+    company_or_individual = models.CharField(verbose_name='client is', max_length=10, choices=(('company','company'),('individual','individual')), default='individual')
+    company = models.CharField(max_length=100, blank=True)
+    job_title = models.CharField(max_length=100, blank=True)
+    departament = models.CharField(max_length=100, blank=True)
+
+class PhoneNumber(models.Model):
+    contact = models.ForeignKey(Contact)
+
+    type = models.CharField(max_length=100)
+    number = models.CharField(max_length=200)
+
+class Address(models.Model):
+    contact = models.ForeignKey(Contact)
+
+    type = models.CharField(max_length=100)
+    street = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    county = models.CharField(max_length=100)
+    postcode = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
 
 class contacts(TimeStampedModel):
     address_city_selected    =models.TextField()
@@ -115,9 +143,9 @@ class contacts(TimeStampedModel):
     phone_other_fax     =models.TextField() #  row_id
     currentrecordnumber    =models.FloatField() # row_id
 
-class ContactNote(TimeStampedModel):
+class Note(TimeStampedModel):
     contact = models.ForeignKey(Contact)
-    Notes = models.TextField()
+    note = models.TextField()
 
 class ContactType(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
