@@ -10,7 +10,7 @@ class Contact(TimeStampedModel):
     name_middle = models.CharField(max_length=100, blank=True)
     name_last  = models.CharField(max_length=100)
     suffix = models.CharField(max_length=100, blank=True)
-    addressed_as = models.CharField(max_length=10, choices=(('custom','Custom')), default='custom')
+    addressed_as = models.CharField(max_length=10, choices=(('custom','Custom'),), default='custom')
     addressed_as_custom = models.CharField(max_length=100, blank=True)
     categories = models.ManyToManyField(Category)
     reference = models.CharField(max_length=100, blank=True)
@@ -18,6 +18,9 @@ class Contact(TimeStampedModel):
     company = models.CharField(max_length=100, blank=True)
     job_title = models.CharField(max_length=100, blank=True)
     departament = models.CharField(max_length=100, blank=True)
+
+    main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber')
+    main_address = models.ForeignKey('Address', related_name='main_address')
 
 class PhoneNumber(models.Model):
     contact = models.ForeignKey(Contact)

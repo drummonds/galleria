@@ -58,8 +58,8 @@ class Migration(SchemaMigration):
             ('company', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
             ('job_title', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
             ('departament', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
-            ('main_phonenumber', self.gf('django.db.models.fields.related.ForeignKey')(related_name='main_phonenumber', to=orm['contacts.PhoneNumber'])),
-            ('main_address', self.gf('django.db.models.fields.related.ForeignKey')(related_name='main_address', to=orm['contacts.Address'])),
+            ('main_phonenumber', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, null=True, related_name='main_phonenumber', to=orm['contacts.PhoneNumber'])),
+            ('main_address', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, null=True, related_name='main_address', to=orm['contacts.Address'])),
         ))
         db.send_create_signal(u'contacts', ['Contact'])
 
@@ -117,8 +117,8 @@ class Migration(SchemaMigration):
             'departament': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'job_title': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
-            'main_address': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'main_address'", 'to': u"orm['contacts.Address']"}),
-            'main_phonenumber': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'main_phonenumber'", 'to': u"orm['contacts.PhoneNumber']"}),
+            'main_address': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'null': 'True', 'related_name': "'main_address'", 'to': u"orm['contacts.Address']"}),
+            'main_phonenumber': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'null': 'True', 'related_name': "'main_phonenumber'", 'to': u"orm['contacts.PhoneNumber']"}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
             'name_first': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name_last': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
