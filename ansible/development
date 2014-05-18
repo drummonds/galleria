@@ -1,6 +1,7 @@
 # Development Inventory file
 
 [webservers]
+ec2-54-73-65-48.eu-west-1.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/galleria.pem
 
 [dbservers]
 

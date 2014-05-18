@@ -4,13 +4,9 @@
 
 - action: shell whoami
   register: whoami
-  tags:
-    - debug
 
 - name: Get one green light
   debug: msg="Hi {{ whoami.stdout }}"
-  tags:
-    - debug
 
 # Maker sure postgres installed setup
 
@@ -25,15 +21,10 @@
 - name: Check if user has been created is installed
   command: sudo -u postgres psql postgres -c"select usename from pg_shadow;"
   register: postgres_users_check
-  tags:
-    - debug
-
 
 - name : Make sure user has been created
   command: sudo -u postgres psql postgres -c"CREATE ROLE postgres_admin WITH PASSWORD '{{ database_password }}' CREATEDB LOGIN;"
   when: postgres_users_check.stdout.find('postgres_admin') == -1
-  tags:
-    - debug
 
 
 # TODO Duplication with Django settings which should be resolved
@@ -51,8 +42,6 @@
     app_path=/home/{{ whoami.stdout }}/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}
     settings={{ project_name }}.settings.{{ deploy_file }}
-  tags:
-    - debug
     
 # Django 1.7 version
 #- name: migrate django database. may need to do by app

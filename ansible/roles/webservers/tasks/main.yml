@@ -110,22 +110,14 @@
 - name: ensure required packages are installed.
   sudo: yes
   action: pip 
-    requirements={{project_root}}/requirements/{{ deploy_file }}.txt virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }} virtualenv_command=virtualenv-3.4
-
-
-
-
-#- name: ensure virtualenv is installed
-#  sudo: yes
-#  action: shell pip install virtualenv
-
+    requirements={{project_root}}/requirements/{{ deploy_file }}.txt virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}
 
 
 # Project setup
 - name: Create the project directory.
   file: state=directory path=/home/ubuntu/projects 
     owner={{ usr }} group={{ usr }}
- 
+
 
 # Install uWSGI
 - name: add uWSGI parameter file
@@ -135,19 +127,13 @@
 - name: Create the directory for the vassals (using uwsgi in emperor mode)
   file: state=directory path=/etc/uwsgi/vassals
     owner={{ usr }} group={{ usr }}
-  tags:
-    - debug
 
 - name: Create a sym link from ini file to the vassals
   file: src=/home/ubuntu/projects/{{ project_name }}/etc/{{ project_name }}_uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
-  tags:
-    - debug
 
 - name: Install uwsgi service script
   copy: src=uwsgi_emperor.conf dest=/etc/init/uwsgi.conf
   notify: restart uwsgi
-  tags:
-    - debug
     
 #  Customise deployment so django is set to the correct environment
 #  First connect the database
@@ -186,13 +172,33 @@
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }}
-    
-- name: migrate django database. may need to do by app
+ 
+- name: create superuser
   django_manage: >
-    command=migrate
+    command=add_superuser --user=test --password=test
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }}
+  
+
+
+- name: migrate apps
+  django_manage: >
+    command=migrate {{item}}
+    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+    settings={{ project_name }}.settings.{{ deploy_file }}
+  with_items:
+    - categories
+    - contacts
+    
+# Django 1.7 version
+#- name: migrate django database. may need to do by app
+#  django_manage: >
+#    command=migrate
+#    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
+#    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
+#    settings={{ project_name }}.settings.{{ deploy_file }}
     
 - name: add static root to settings file
   lineinfile: >

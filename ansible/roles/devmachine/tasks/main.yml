@@ -59,7 +59,7 @@
 - name: ensure required packages are installed.
   sudo: yes
   action: pip 
-    requirements=/home/{{ whoami.stdout }}/projects/{{ project_name }}/requirements/local.txt virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }} virtualenv_command=virtualenv-3.4
+    requirements=/home/{{ whoami.stdout }}/projects/{{ project_name }}/requirements/{{ deploy_file }}.txt virtualenv=/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }} virtualenv_command=virtualenv-3.4
 
 
 
