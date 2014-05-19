@@ -12,11 +12,12 @@ class AddressInline(admin.StackedInline):
     model = Address
 
 class PhoneNumberInline(admin.TabularInline):
-	model = PhoneNumber
+    model = PhoneNumber
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'name_first', 'name_last')
-	inlines = [NoteInline, AddressInline, PhoneNumberInline]
+    inlines = [NoteInline, AddressInline, PhoneNumberInline]
 
 admin.site.register(ContactType, ContactTypeAdmin)
 admin.site.register(Contact, ContactAdmin)
+
