@@ -169,14 +169,10 @@
 - name: add postgres database file password so that psql can work
   template: src=pgpass.j2
     dest="/home/ubuntu/.pgpass"
-  tags:
-    - debug
 
 - name: Make sure permission of Postgres password file correct and it exists
   file: state=file path=/home/ubuntu/.pgpass
     owner={{ usr }} group={{ usr }} mode=0600
-  tags:
-    - debug
 
 - name: Sync Django database.
   django_manage: >
@@ -184,6 +180,8 @@
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }} 
+  tags:
+    - debug
 
 
 # Not yet working if I log in manually and run the command it does work
