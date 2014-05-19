@@ -5,22 +5,39 @@ from categories.models import Category
 
 class Contact(TimeStampedModel):
     type = models.ForeignKey('ContactType')
-    title = models.CharField(max_length=100, blank=True)
-    name_first = models.CharField(max_length=100)
-    name_middle = models.CharField(max_length=100, blank=True)
-    name_last  = models.CharField(max_length=100)
-    suffix = models.CharField(max_length=100, blank=True)
-    addressed_as = models.CharField(max_length=100, choices=(('custom','Custom'),), default='custom')
-    addressed_as_custom = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=100, blank=True, default='')
+    name_first = models.CharField(max_length=100, blank=True, default='')
+    name_middle = models.CharField(max_length=100, blank=True, default='')
+    name_last  = models.CharField(max_length=100, blank=True, default='')
+    suffix = models.CharField(max_length=100, blank=True, default='')
+    addressed_as = models.CharField(max_length=100, choices=(('calculated','Calculated'),('custom','Custom'),), default='calculated')
+    addressed_as_custom = models.CharField(max_length=255, blank=True, default='')
     categories = models.ManyToManyField(Category)
-    reference = models.CharField(max_length=100, blank=True)
+    reference = models.CharField(max_length=100, blank=True, default='')
     company_or_individual = models.CharField(verbose_name='client is', max_length=10, choices=(('company','company'),('individual','individual')), default='individual')
-    company = models.CharField(max_length=100, blank=True)
-    job_title = models.CharField(max_length=100, blank=True)
-    department = models.CharField(max_length=100, blank=True)
+    company = models.CharField(max_length=100, blank=True, default='')
+    job_title = models.CharField(max_length=100, blank=True, default='')
+    department = models.CharField(max_length=100, blank=True, default='')
 
     main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber', blank=True, null=True) # We may not have a phone number
     main_address = models.ForeignKey('Address', related_name='main_address', blank=True, null=True) # We may not have an address
+
+    def _get_full_name(self):
+        "Returns the person's full name."
+        if self.middlename:
+            result='{} {} {}'.format(self.name_first, self.name_middle, self.name_last)
+        else:
+            result='{} {}'.format(self.name_first, self.name_last)
+        return(result)
+    full_name = property(_get_full_name)
+
+    def _get_short_summary(self):
+        "Returns a short summary of this contact."
+        return('{}-{}'.format(self.full_name, self.type))
+    short_summary = property(_get_short_summary)
+
+    def __unicode__(self):
+        return("{}".format(self.short_summary))
 
 class PhoneNumber(models.Model):
     contact = models.ForeignKey(Contact)
