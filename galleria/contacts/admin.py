@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import ContactType, Contact, PhoneNumber, Address, Note
+from .models import ContactType, Contact, PhoneNumber, Address, Note
 
 class ContactTypeAdmin(admin.ModelAdmin):
 	list_display = ('__unicode__', 'name')

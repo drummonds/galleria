@@ -1,6 +1,6 @@
 from extra_views import UpdateWithInlinesView, InlineFormSet
 
-from models import Contact, PhoneNumber, Address, Note
+from .models import Contact, PhoneNumber, Address, Note
 
 class PhoneNumberInline(InlineFormSet):
 	model = PhoneNumber
