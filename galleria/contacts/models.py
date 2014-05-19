@@ -19,8 +19,8 @@ class Contact(TimeStampedModel):
     job_title = models.CharField(max_length=100, blank=True)
     department = models.CharField(max_length=100, blank=True)
 
-    main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber')
-    main_address = models.ForeignKey('Address', related_name='main_address')
+    main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber', blank=True, null=True) # We may not have a phone number
+    main_address = models.ForeignKey('Address', related_name='main_address', blank=True, null=True) # We may not have an address
 
 class PhoneNumber(models.Model):
     contact = models.ForeignKey(Contact)
