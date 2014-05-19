@@ -10,14 +10,14 @@ class Contact(TimeStampedModel):
     name_middle = models.CharField(max_length=100, blank=True)
     name_last  = models.CharField(max_length=100)
     suffix = models.CharField(max_length=100, blank=True)
-    addressed_as = models.CharField(max_length=10, choices=(('custom','Custom'),), default='custom')
+    addressed_as = models.CharField(max_length=100, choices=(('custom','Custom'),), default='custom')
     addressed_as_custom = models.CharField(max_length=100, blank=True)
     categories = models.ManyToManyField(Category)
     reference = models.CharField(max_length=100, blank=True)
     company_or_individual = models.CharField(verbose_name='client is', max_length=10, choices=(('company','company'),('individual','individual')), default='individual')
     company = models.CharField(max_length=100, blank=True)
     job_title = models.CharField(max_length=100, blank=True)
-    departament = models.CharField(max_length=100, blank=True)
+    department = models.CharField(max_length=100, blank=True)
 
     main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber')
     main_address = models.ForeignKey('Address', related_name='main_address')
@@ -151,7 +151,7 @@ class Note(TimeStampedModel):
     note = models.TextField()
 
 class ContactType(models.Model):
-    name = models.CharField(max_length=255, null=False, blank=False)
+    name = models.CharField(max_length=30, null=False, blank=False)
 
     def __unicode__(self):
         return("{}".format(self.name))
