@@ -4,6 +4,8 @@ from model_utils.models import TimeStampedModel
 from categories.models import Category
 
 class Contact(TimeStampedModel):
+    readonly_fields = ('migration_id',)
+
     type = models.ForeignKey('ContactType')
     title = models.CharField(max_length=100, blank=True, default='')
     name_first = models.CharField(max_length=100, blank=True, default='')
@@ -21,6 +23,7 @@ class Contact(TimeStampedModel):
 
     main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber', blank=True, null=True) # We may not have a phone number
     main_address = models.ForeignKey('Address', related_name='main_address', blank=True, null=True) # We may not have an address
+    migration_id = models.IntegerField(blank=True, null=True)
 
     def _get_full_name(self):
         "Returns the person's full name."
@@ -36,7 +39,7 @@ class Contact(TimeStampedModel):
         return('{}-{}'.format(self.full_name, self.type))
     short_summary = property(_get_short_summary)
 
-    def __unicode__(self):
+    def __str__(self):
         return("{}".format(self.short_summary))
 
 class PhoneNumber(models.Model):
@@ -170,6 +173,6 @@ class Note(TimeStampedModel):
 class ContactType(models.Model):
     name = models.CharField(max_length=30, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return("{}".format(self.name))
 
