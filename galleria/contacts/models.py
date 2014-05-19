@@ -24,7 +24,7 @@ class Contact(TimeStampedModel):
 
     def _get_full_name(self):
         "Returns the person's full name."
-        if self.middlename:
+        if self.name_middle:
             result='{} {} {}'.format(self.name_first, self.name_middle, self.name_last)
         else:
             result='{} {}'.format(self.name_first, self.name_last)
