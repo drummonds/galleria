@@ -14,7 +14,7 @@ class Contact(TimeStampedModel):
     suffix = models.CharField(max_length=100, blank=True, default='')
     addressed_as = models.CharField(max_length=100, choices=(('calculated','Calculated'),('custom','Custom'),), default='calculated')
     addressed_as_custom = models.CharField(max_length=255, blank=True, default='')
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, blank=True, null=True)
     reference = models.CharField(max_length=255, blank=True, default='')
     company_or_individual = models.CharField(verbose_name='client is', max_length=10, choices=(('company','company'),('individual','individual')), default='individual')
     company = models.CharField(max_length=100, blank=True, default='')
