@@ -24,6 +24,7 @@ class Contact(TimeStampedModel):
     main_phonenumber = models.ForeignKey('PhoneNumber', related_name='main_phonenumber', blank=True, null=True) # We may not have a phone number
     main_address = models.ForeignKey('Address', related_name='main_address', blank=True, null=True) # We may not have an address
     migration_id = models.IntegerField(blank=True, null=True)
+    is_artist = models.BooleanField(default=False)
 
     def _get_full_name(self):
         "Returns the person's full name."

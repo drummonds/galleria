@@ -211,6 +211,7 @@
   with_items:
     - categories
     - contacts
+    - artists
   tags:
     - debug
     
