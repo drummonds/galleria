@@ -35,7 +35,8 @@ DEFAULT_APPS = (
 
 THIRD_PARTY_APPS = (
     'south',
-    'bootstrap3'
+    'bootstrap3',
+    'django_markdown',
 )
 
 LOCAL_APPS = (

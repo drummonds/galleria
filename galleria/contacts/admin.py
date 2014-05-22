@@ -17,6 +17,7 @@ class PhoneNumberInline(admin.TabularInline):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'name_first', 'name_last')
     inlines = [NoteInline, AddressInline, PhoneNumberInline]
+    search_fields = ['name_first', 'name_last']
 
 admin.site.register(ContactType, ContactTypeAdmin)
 admin.site.register(Contact, ContactAdmin)
