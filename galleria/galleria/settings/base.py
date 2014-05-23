@@ -7,11 +7,20 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+# Build paths inside the project like this: BASE_DIR.child("media")
+
+from unipath import Path
+BASE_DIR = Path(__file__).ancestor(3) #Root of Django project
+BASE_APP_DIR = Path(__file__).ancestor(2) #Root of main app of Django project
+PROJECT_NAME = BASE_DIR.name # eg galleria
+
+#The BASE_PRIVATE_DIR is the root of settings that should not be in the public GIT they are the information
+# that will customise the application to a specific client. So for development this should be very little but possible
+# if you like to have something a particular way and vital for production.
+
+BASE_PRIVATE_DIR = Path(__file__).ancestor(5).child(PROJECT_NAME + '_private')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -62,7 +71,7 @@ ROOT_URLCONF = 'galleria.urls'
 WSGI_APPLICATION = 'galleria.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    BASE_APP_DIR.child('templates'),
 )
 
 from django.conf import global_settings
@@ -117,4 +126,4 @@ except ImportError:
     pass
 
 #Application settings to customise the look and feel of the application
-GALLERIA_BRAND = 'galleria'
+GALLERIA_BRAND = PROJECT_NAME
