@@ -42,17 +42,21 @@ DEFAULT_APPS = (
     'django.contrib.staticfiles',
 )
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 THIRD_PARTY_APPS = (
     'south',
     'bootstrap3',
     'django_markdown',
+    'crispy_forms',
 )
 
 LOCAL_APPS = (
     'categories',
     'contacts',
     'artists',
-    'galleria'
+    'galleria',
+    'stocks',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS

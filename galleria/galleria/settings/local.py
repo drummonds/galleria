@@ -29,12 +29,8 @@ DATABASES = {
     }
 }
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
 INSTALLED_APPS += (
     'debug_toolbar',
-    'crispy_forms',
-    'stocks',
     )
     
 

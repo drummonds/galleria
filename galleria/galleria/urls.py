@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url('^markdown/', include( 'django_markdown.urls')),
     url(r'^stocks/', include('stocks.urls')), #Crud demo
+    url(r'^categories/', include('categories.urls')), #Crud live demo
 )
