@@ -11,3 +11,4 @@ class ArtistAdmin(MarkdownModelAdmin):
 
 admin.site.register(Artist, ArtistAdmin)
 
+

@@ -4,7 +4,6 @@ from model_utils.models import TimeStampedModel
 
 from contacts.models import Contact
 
-
 # Artist is a special version of contact
 class Artist(TimeStampedModel):
     contact = models.OneToOneField(Contact, primary_key=True, limit_choices_to={'is_artist': True})
@@ -17,5 +16,4 @@ class Artist(TimeStampedModel):
 
     def __str__(self):
         return("{} {} {} ".format(self.contact.name_first,self.contact.name_last,self.gallery_id))
-
 
