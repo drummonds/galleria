@@ -68,7 +68,7 @@ TEMPLATE_DIRS = (
 from django.conf import global_settings
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
      "django.core.context_processors.request",
-)
+     "galleria.context_processors.galleria_context_processor",)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -115,3 +115,6 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+#Application settings to customise the look and feel of the application
+GALLERIA_BRAND = 'galleria'
