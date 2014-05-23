@@ -1,12 +1,14 @@
 from django.conf.urls import patterns, include, url
 from .views import PublicView
+from contacts.views import ContactView
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', PublicView.as_view(), name='public'),
-    url(r'^contacts/$', include('contacts.urls')),
+    url(r'^contact/', include('contacts.urls')),
+    url(r'^dcontacts$', ContactView.as_view(), name='contact'),
 
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
