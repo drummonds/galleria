@@ -29,7 +29,14 @@ DATABASES = {
     }
 }
 
-INSTALLED_APPS += ("debug_toolbar", )
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+INSTALLED_APPS += (
+    'debug_toolbar',
+    'crispy_forms',
+    'stocks',
+    )
+    
 
 #Allow local override which is per deployment instance.  There should probably then be an instance
 # git for version control of that data
