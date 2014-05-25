@@ -47,7 +47,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 THIRD_PARTY_APPS = (
     'south',
     'bootstrap3',
-    'django_markdown',
+    'django_markdown', # to provide markdown editing
+    'markdown_deux', # to provide markdown template tag
     'crispy_forms',
 )
 

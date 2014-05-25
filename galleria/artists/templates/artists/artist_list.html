@@ -1,0 +1,55 @@
+{% extends "artist_base.html" %}
+{% load markdown_deux_tags %}
+{% block title %}Artist{% endblock %}
+
+{% block content %}
+    <h1>Artist Listing</h1>
+    <a class="btn btn-primary" href="{% url 'artist_create' %}">Create</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Contact ID</th>
+          <th>Biography</th>
+          <th>Prices</th>
+          <th>Info</th>
+          <th>Gallery ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.contact }}</td>
+                <td>{{ object.biography|truncatechars:20 }}</td>
+                <td>{{ object.price|truncatechars:20 }}</td>
+                <td>{{ object.info|truncatechars:20 }}</td>
+                <td>{{ object.gallery_id }}</td>
+                <td>
+                    <a class="btn btn-info btn-xs" href="{% url 'artist_detail' object.pk %}">Details</a> 
+                    <a class="btn btn-warning btn-xs" href="{% url 'artist_update' object.pk %}">Update</a> 
+                </td>
+            </tr>
+        {% empty %}
+                <td colspan="3">No items.</td>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'artist_list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'artist_list' %}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

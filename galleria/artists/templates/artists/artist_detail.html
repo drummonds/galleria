@@ -1,0 +1,16 @@
+{% extends "artist_base.html" %}
+{% load artist_markup %}
+{% load markdown_deux_tags %}
+{% block title %}Artist Detail{% endblock %}
+
+{% block content %}
+    <h1>Artist Detail</h1>
+    <p>{{ object.name }}</p>
+    <p>{{ object.contact }}</p>
+    <p>{{ object.biography | markdown2 }}</p>
+    <p>{{ object.price | markdown2 }}</p>
+    <p>{{ object.info  | markdown2 }}</p>
+    <p>{{ object.gallery_id }}</p>
+
+    <a href="{% url 'artist_list' %}">List</a>
+{% endblock %}
