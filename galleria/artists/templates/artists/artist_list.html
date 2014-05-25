@@ -1,5 +1,4 @@
 {% extends "artist_base.html" %}
-{% load markdown_deux_tags %}
 {% block title %}Artist{% endblock %}
 
 {% block content %}
@@ -20,9 +19,9 @@
         {% for object in object_list %}
             <tr>
                 <td>{{ object.contact }}</td>
-                <td>{{ object.biography|truncatechars:20 }}</td>
-                <td>{{ object.price|truncatechars:20 }}</td>
-                <td>{{ object.info|truncatechars:20 }}</td>
+                <td>{{ object.biography|truncatechars:30 }}</td>
+                <td>{{ object.price|truncatechars:30 }}</td>
+                <td>{{ object.info|truncatechars:30 }}</td>
                 <td>{{ object.gallery_id }}</td>
                 <td>
                     <a class="btn btn-info btn-xs" href="{% url 'artist_detail' object.pk %}">Details</a> 
