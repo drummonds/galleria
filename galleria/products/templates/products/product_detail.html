@@ -1,0 +1,17 @@
+{% extends "products_base.html" %}
+{% block title %}Product{% endblock %}
+
+{% block content %}
+    <h1>Detail {{$object.__str__ }}</h1>
+    <p><em> Description = </em>{{ object.name }}</p>
+    {% if object.has_colour %}
+      <p><em> Colour = </em>{{ object.colour }}</p>
+    {% endif %}
+    {% if object.has_size %}
+      <p><em> Size = </em>{{ object.size }}</p>
+    {% endif %}
+    <p><em> Stock = </em>{{ object.size }}</p>
+    <p><em> Price = </em>{{ object.item_price }}</p>
+    <p><em> Price of initials = </em>{{ object.initials_price }}</p>
+    <a href="{% url 'product_list' %}">List</a>
+{% endblock %}

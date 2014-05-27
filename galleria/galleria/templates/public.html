@@ -2,10 +2,10 @@
 {% block title %}Home{% endblock %}
 {% block content %}
     {% if request.user.is_anonymous %}
-    <h1>Welcome to Galleria! public page</h1>
-    <img src="https://raw.githubusercontent.com/drummonds/galleria/master/documentation/images/login-sketch.png" alt=" Welcome to Galleria image" />
+      <h1>Welcome to Galleria! public page</h1>
+      <img src="https://raw.githubusercontent.com/drummonds/galleria/master/documentation/images/login-sketch.png" alt=" Welcome to Galleria image" />
     {% else %}
-    <h1>Welcome to Galleria! home page</h1>
-    <img src="https://raw.githubusercontent.com/drummonds/galleria/master/documentation/images/home-sketch.png" alt=" Galleria home page" />
+      <h1>Welcome to Galleria! home page</h1>
+      {{ galleria_frontpage }}
     {% endif %} 
 {% endblock %}

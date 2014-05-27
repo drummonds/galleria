@@ -44,6 +44,13 @@
         {% else %}
           {% block nav-contacts %}<li><a href="/contacts">Contacts</a></li>{% endblock %}
           {% block nav-artists %}<li><a href="/artists">Artists</a></li>{% endblock %}
+          <li class="dropdown" {% block nav-englishroom-dropdown %}{% endblock %}>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">English Room<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              {% block nav-products %}<li><a href="/products/">Products</a></li>{% endblock %}
+              <li><a href="#">Ordering</a></li>
+            </ul>
+          </li>
           <li class="dropdown" {% block nav-admin-dropdown %}{% endblock %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
             <ul class="dropdown-menu">

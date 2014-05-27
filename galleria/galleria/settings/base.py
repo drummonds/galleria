@@ -57,6 +57,7 @@ LOCAL_APPS = (
     'artists',
     'galleria',
     'stocks',
+    'products',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -131,3 +132,5 @@ except ImportError:
 
 #Application settings to customise the look and feel of the application
 GALLERIA_BRAND = PROJECT_NAME
+GALLERIA_FRONTPAGE = '<img src="https://raw.githubusercontent.com/drummonds/galleria/master/documentation/images/home-sketch.png" alt=" Galleria home page" />'
+

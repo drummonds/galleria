@@ -17,9 +17,12 @@ urlpatterns = patterns('',
     url(r'^password-reset/complete/$', 'django.contrib.auth.views.password_reset_complete', {'template_name': 'password_reset.html'}, name='password_reset_done'),
 
     url(r'^admin/', include(admin.site.urls)),
-    url('^markdown/', include( 'django_markdown.urls')),
+    url(r'^markdown/', include( 'django_markdown.urls')),
     url(r'^stocks/', include('stocks.urls')), #Crud demo
     url(r'^categories/', include('categories.urls')), #Crud live demo
     url(r'^artists/', include('artists.urls')), #Crud live demo
     url(r'^contacts/', include('contacts.urls')), #Crud live demo
+    url(r'^products/', include('products.urls')), #Crud live demo
+
+    url(r'^', PublicView.as_view(), name='public'), # Catchall and take to front page
 )
