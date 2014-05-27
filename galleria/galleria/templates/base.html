@@ -42,8 +42,8 @@
       <ul class="nav navbar-nav">
         {% if request.user.is_anonymous %}
         {% else %}
-          {% block nav-contacts %}<li><a href="/contacts">Contacts</a></li>{% endblock %}
-          {% block nav-artists %}<li><a href="/artists">Artists</a></li>{% endblock %}
+          {% block nav-contacts %}<li><a href="/contacts/">Contacts</a></li>{% endblock %}
+          {% block nav-artists %}<li><a href="/artists/">Artists</a></li>{% endblock %}
           <li class="dropdown" {% block nav-englishroom-dropdown %}{% endblock %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">English Room<b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -54,14 +54,14 @@
           <li class="dropdown" {% block nav-admin-dropdown %}{% endblock %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              {% block nav-contact-types %}<li><a href="/contacts/type">Contact Types</a></li>{% endblock %}
-              {% block nav-categories %}<li><a href="/categories">Categories</a></li>{% endblock %}
+              {% block nav-contact-types %}<li><a href="/contacts/type/">Contact Types</a></li>{% endblock %}
+              {% block nav-categories %}<li><a href="/categories/">Categories</a></li>{% endblock %}
               <li class="divider"></li>
-              {% block nav-stocks %}<li><a href="/stocks">Stocks</a></li>{% endblock %}
+              {% block nav-stocks %}<li><a href="/stocks/">Stocks</a></li>{% endblock %}
               <li class="divider"></li>
               <li><a href="#">Profile</a></li>
               <li class="divider"></li>
-              <li><a href="/admin">Admin</a></li>
+              <li><a href="/admin/">Admin</a></li>
             </ul>
           </li>
         {% endif %}
