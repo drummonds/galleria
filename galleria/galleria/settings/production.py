@@ -9,6 +9,8 @@ Local Django settings for galleria project.
 
 from .base import *
 
+ALLOWED_HOSTS = ['*'] # This is like the debug case and should be overridden in the private settings file
+
 #Allow local override which is per deployment instance.  There should probably then be an instance
 # git for version control of that data
 try:

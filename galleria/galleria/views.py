@@ -14,5 +14,5 @@ class PublicView(TemplateView):
             url = reverse('contact_list')
             return(redirect(url))
         else:
-            return(super(CategoryCRUDView, self).dispatch(*args, **kwargs))
+            return(super(PublicView, self).dispatch(*args, **kwargs))
 
