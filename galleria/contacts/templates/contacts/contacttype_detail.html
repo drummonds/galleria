@@ -1,0 +1,8 @@
+{% extends "contact_types_base.html" %}
+{% block title %}ContactType{% endblock %}
+
+{% block content %}
+    <h1>Detail</h1>
+    <p>{{ object.name }}</p>
+    <a href="{% url 'contacttype_list' %}">List</a>
+{% endblock %}

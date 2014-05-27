@@ -1,0 +1,53 @@
+{% extends "contacts_base.html" %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+    <h1>Contact Listing</h1>
+    <a class="btn btn-primary" href="{% url 'contact_create' %}">Create</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.id }}</td>
+                <td>{{ object.type }}</td>
+                <td>{{ object.name_first }}</td>
+                <td>{{ object.name_last }}</td>
+                <td>
+                    <a class="btn btn-info btn-xs" href="{% url 'contact_detail' object.pk %}">Details</a> 
+                    <a class="btn btn-warning btn-xs" href="{% url 'contact_update' object.pk %}">Update</a> 
+                    <a class="btn btn-danger btn-xs" href="{% url 'contact_delete' object.pk %}">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+                <td colspan="5">No items.</td>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'contact_list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'contact_list' %}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

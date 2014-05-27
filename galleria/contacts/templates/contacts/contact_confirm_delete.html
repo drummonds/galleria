@@ -1,0 +1,12 @@
+{% extends "contacts_base.html" %}
+{% block title %}Delete contacts{% endblock %}
+
+{% block content %}
+    <h1>Delete</h1>
+    <p>Are you sure you want to delete?</p>
+
+    <form id="contact_form" method="post" action=".">
+    {% csrf_token %}
+    <input type="submit" value="Yes" class="btn btn-primary" /> <a href="{% url 'contact_list' %}" class="btn btn-danger">No</a>
+    </form>
+{% endblock %}

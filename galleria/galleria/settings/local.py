@@ -45,4 +45,6 @@ except ImportError:
     print(" No local overide private_settings.py found in  = {}".format(private_path))
     # If it doesnt' exist that is fine and just use application defaults
 
+# For model mommy
+DEFAULT_INDEX_TABLESPACE=''
 

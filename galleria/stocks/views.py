@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from vanilla import ListView, CreateView, DetailView, UpdateView, DeleteView
 from stocks.forms import StockForm
@@ -11,6 +13,10 @@ class StockCRUDView(object):
 
     def get_success_url(self):
         return reverse('stock_list')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(StockCRUDView, self).dispatch(*args, **kwargs)
 
 
 class StockList(StockCRUDView, ListView):

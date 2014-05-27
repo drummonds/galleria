@@ -1,4 +1,6 @@
+from django.core.urlresolvers import reverse
 from django.db import models
+
 from model_utils.models import TimeStampedModel
 
 from categories.models import Category
@@ -42,6 +44,12 @@ class Contact(TimeStampedModel):
 
     def __str__(self):
         return("{}".format(self.short_summary))
+
+    def __repr__(self):
+        return self.__str__()
+
+    def get_absolute_url(self):
+        return reverse('contact_detail', args=[str(self.id)])
 
 class PhoneNumber(models.Model):
     contact = models.ForeignKey(Contact)
@@ -176,4 +184,11 @@ class ContactType(models.Model):
 
     def __str__(self):
         return("{}".format(self.name))
+
+
+    def __repr__(self):
+        return self.__str__()
+
+    def get_absolute_url(self):
+        return reverse('contacttype_detail', args=[str(self.id)])
 

@@ -1,0 +1,9 @@
+{% extends "contacts_base.html" %}
+{% block title %}Contact{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>{% if object %}Update{% else %}Create{% endif %}</h1>
+    {% crispy form %}
+{% endblock %}

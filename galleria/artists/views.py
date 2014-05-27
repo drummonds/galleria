@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from vanilla import ListView, CreateView, DetailView, UpdateView, DeleteView
 from artists.forms import ArtistForm
 from artists.models import Artist
-
 
 class ArtistCRUDView(object):
     model = Artist
@@ -11,6 +12,10 @@ class ArtistCRUDView(object):
 
     def get_success_url(self):
         return reverse('artist_list')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ArtistCRUDView, self).dispatch(*args, **kwargs)
 
 
 class ArtistList(ArtistCRUDView, ListView):
@@ -31,3 +36,4 @@ class ArtistUpdate(ArtistCRUDView, UpdateView):
 
 class ArtistDelete(ArtistCRUDView, DeleteView):
     pass
+

@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from vanilla import ListView, CreateView, DetailView, UpdateView, DeleteView
 from categories.forms import CategoryForm
@@ -11,6 +13,10 @@ class CategoryCRUDView(object):
 
     def get_success_url(self):
         return reverse('category_list')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CategoryCRUDView, self).dispatch(*args, **kwargs)
 
 
 class CategoryList(CategoryCRUDView, ListView):
@@ -31,3 +37,4 @@ class CategoryUpdate(CategoryCRUDView, UpdateView):
 
 class CategoryDelete(CategoryCRUDView, DeleteView):
     pass
+
