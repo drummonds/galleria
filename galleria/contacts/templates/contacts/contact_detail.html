@@ -2,7 +2,28 @@
 {% block title %}Contact list{% endblock %}
 
 {% block content %}
-    <h1>Detail</h1>
-    <p>{{ object.name }}</p>
+    <h1>Detail for {{ object.full_name }}</h1>
+    <p><em>Full name</em> {{ object.full_name }}</p>
+    <p><em>Type</em> {{ object.type }}</p>
+    <p><em>Title</em> {{ object.title }}</p>
+    <p><em>First name</em> {{ object.name_first }}</p>
+    <p><em>Middle name</em> {{ object.name_middle }}</p>
+    <p><em>Last name</em> {{ object.name_last }}</p>
+    <p><em>Suffix</em> {{ object.suffix }}</p>
+    <p><em>Address as</em> {{ object.addressed_as }}</p>
+    <p><em>Categories</em> 
+	{% for category in object.categories.all %}
+    	   {{ category.name }},
+        {% endfor %}
+    </p>
+    <p><em>Reference</em> {{ object.reference }}</p>
+    <p><em>Company or Individual</em> {{ object.company_or_individual }}</p>
+    <p><em>Company</em> {{ object.company }}</p>
+    <p><em>Job title</em> {{ object.job_title }}</p>
+    <p><em>Department</em> {{ object.department }}</p>
+    <p><em>Main Phone number</em> {{ object.main_phonenumber }}</p>
+    <p><em>Main Address</em> {{ object.main_address }}</p>
+    <p><em>Migration Id</em> {{ object.migration_id }}</p>
+    <p><em>Is artist</em> {{ object.is_artist }}</p>
     <a href="{% url 'contact_list' %}">List</a>
 {% endblock %}
