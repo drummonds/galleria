@@ -64,14 +64,17 @@ class ContactCRUDView(object):
         return super(ContactCRUDView, self).dispatch(*args, **kwargs)
 
 
-#class ContactList(ContactCRUDView, ListView):
-class ContactList(ListFilteredMixin,SingleTableView):
-    table_class = ThemedContactTable
-    #queryset = Contact.objects.order_by('name_last').all() # nervous about speed
-    queryset = Contact.objects.all()
-    filter_set = ContactFilter
-    template_name = "contacts/contact_list.html"
-    order_by = ('name_last',)
+class ContactList(ContactCRUDView, ListView):
+    pass
+
+#class ContactList(ListFilteredMixin,SingleTableView):
+#    table_class = ThemedContactTable
+#    #queryset = Contact.objects.order_by('name_last').all() # nervous about speed
+#    queryset = Contact.objects.all()
+#    filter_set = ContactFilter
+#    template_name = "contacts/contact_list.html"
+#    order_by = ('name_last',)
+#    paginate_by = 20
 
 
 class ContactCreate(ContactCRUDView, CreateView):

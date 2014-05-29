@@ -2,6 +2,22 @@
 {% block title %}Contact{% endblock %}
 
 {% block content %}
+    <h1>Contacts filter</h1>
+    <!-- <div>
+    <p><a class="btn btn-primary" href="{% url 'contact_create' %}">Create</a></p>
+    -->
+    <p>
+      <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit"/>
+      </form>
+    </p>
+    <!-- <div>
+    {% load django_tables2 %}
+    {% render_table table %}
+    </div> 
+    -->
+
     <h1>Contact Listing</h1>
     <a class="btn btn-primary" href="{% url 'contact_create' %}">Create</a>
     <table class="table table-striped">
