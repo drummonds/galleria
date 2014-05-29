@@ -5,21 +5,27 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
+from django_tables2   import RequestConfig, SingleTableView
 from vanilla import ListView, CreateView, DetailView, UpdateView, DeleteView
 from extra_views import UpdateWithInlinesView, InlineFormSet
 
 from .forms import ContactForm,ContactTypeForm
-from .models import Contact, PhoneNumber, Address, Note, ContactType
+from .tables import ContactTable, ThemedContactTable
+from .models import Contact, ContactFilter, PhoneNumber, Address, Note, ContactType
+from galleria.filter_mixin import ListFilteredMixin
 
 
 class PhoneNumberInline(InlineFormSet):
     model = PhoneNumber
 
+
 class AddressInline(InlineFormSet):
     model = Address
 
+
 class NoteInline(InlineFormSet):
     model = Note
+
 
 class ContactUpdate(UpdateWithInlinesView):
     model = Contact
@@ -58,8 +64,14 @@ class ContactCRUDView(object):
         return super(ContactCRUDView, self).dispatch(*args, **kwargs)
 
 
-class ContactList(ContactCRUDView, ListView):
-    pass
+#class ContactList(ContactCRUDView, ListView):
+class ContactList(ListFilteredMixin,SingleTableView):
+    table_class = ThemedContactTable
+    #queryset = Contact.objects.order_by('name_last').all() # nervous about speed
+    queryset = Contact.objects.all()
+    filter_set = ContactFilter
+    template_name = "contacts/contact_list.html"
+    order_by = ('name_last',)
 
 
 class ContactCreate(ContactCRUDView, CreateView):

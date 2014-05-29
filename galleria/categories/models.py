@@ -39,6 +39,7 @@ class CategoryList(tables.SingleTableView):
 
 class CategoryFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type='contains')
+    description = django_filters.CharFilter(lookup_type='contains')
     class Meta:
         model = Category
         fields = ['name', 'description']

@@ -198,3 +198,20 @@ class ContactType(models.Model):
     def get_absolute_url(self):
         return reverse('contacttype_detail', args=[str(self.id)])
 
+class ContactTable(tables.Table):
+    class Meta:
+        model = Contact
+
+class ContactList(tables.SingleTableView):
+    model=Contact
+    table_class = ContactTable
+
+
+class ContactFilter(django_filters.FilterSet):
+    name_first = django_filters.CharFilter(lookup_type='contains')
+    name_last = django_filters.CharFilter(lookup_type='contains')
+    class Meta:
+        model = Category
+        fields = ['name_first', 'name_first']
+
+
