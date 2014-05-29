@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
+
 from categories.views import CategoryList, CategoryCreate, CategoryDetail, CategoryUpdate, CategoryDelete
 
 # The leading / is in the top level pattern which might be like:

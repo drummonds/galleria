@@ -1,49 +1,17 @@
 {% extends "categories_base.html" %}
+{% load django_tables2 %}
 {% block title %}Categories{% endblock %}
 
 {% block content %}
     <h1>Categories</h1>
-    <a class="btn btn-primary" href="{% url 'category_create' %}">Create</a>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for object in object_list %}
-            <tr>
-                <td>{{ object.id }}</td>
-                <td>{{ object.name }}</td>
-                <td>
-                    <a class="btn btn-info btn-xs" href="{% url 'category_detail' object.pk %}">Details</a> 
-                    <a class="btn btn-warning btn-xs" href="{% url 'category_update' object.pk %}">Update</a> 
-                    <a class="btn btn-danger btn-xs" href="{% url 'category_delete' object.pk %}">Delete</a>
-                </td>
-            </tr>
-        {% empty %}
-                <td colspan="3">No items.</td>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    {% if is_paginated %}
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="{% url 'category_list' %}?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="{% url 'category_list' %}?page={{ page_obj.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-        </div>
-    {% endif %}
-
-
+    <p><a class="btn btn-primary" href="{% url 'category_create' %}">Create</a></p>
+    <p>
+      <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit"/>
+      </form>
+    </p>
+    <div>
+    {% render_table table %}
+    </div>
 {% endblock %}

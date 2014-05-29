@@ -1,5 +1,19 @@
 {% extends "base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+<style type="text/css">
+  pre {
+    background-color: #D8F0FF;
+    border: 1px solid #9BBBD5;
+    padding: 8px;
+  }
+</style>
+{% endblock %}
 {% block title %}Categories form{% endblock %}
 {% block nav-admin-dropdown %} class="active" {% endblock %}
-{% block nav-categories %}<li class="active"><a href="/categories/">Categories</a></li>{% endblock %}
+{% block nav-categories %}
+<li class="active">
+  <a href="/categories/">Categories</a>
+</li>
+{% endblock %}
 

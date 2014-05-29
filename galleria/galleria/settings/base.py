@@ -49,6 +49,8 @@ THIRD_PARTY_APPS = (
     'bootstrap3',
     'django_markdown', # to provide markdown editing
     'crispy_forms',
+    'django_tables2',
+    'django_filters',
 )
 
 LOCAL_APPS = (
@@ -79,10 +81,25 @@ TEMPLATE_DIRS = (
     BASE_APP_DIR.child('templates'),
 )
 
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
+
 from django.conf import global_settings
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-     "django.core.context_processors.request",
-     "galleria.context_processors.galleria_context_processor",)
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
+
+    "galleria.context_processors.galleria_context_processor",
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

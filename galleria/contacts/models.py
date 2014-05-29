@@ -1,6 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 
+import django_tables2 as tables
+import django_filters
 from model_utils.models import TimeStampedModel
 
 from categories.models import Category
@@ -41,6 +43,10 @@ class Contact(TimeStampedModel):
         "Returns a short summary of this contact."
         return('{}-{}'.format(self.full_name, self.type))
     short_summary = property(_get_short_summary)
+
+    @property
+    def summary(self):
+        return(self.short_summary)
 
     def __str__(self):
         return("{}".format(self.short_summary))
