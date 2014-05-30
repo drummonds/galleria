@@ -2,7 +2,7 @@
 {% block title %}Product{% endblock %}
 
 {% block content %}
-    <h1>Detail {{$object.__str__ }}</h1>
+    <h1>Detail {{ object.description }}</h1>
     <p><em> Description = </em>{{ object.name }}</p>
     {% if object.has_colour %}
       <p><em> Colour = </em>{{ object.colour }}</p>

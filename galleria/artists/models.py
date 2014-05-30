@@ -3,6 +3,7 @@ from django.db import models
 
 from model_utils.models import TimeStampedModel
 
+
 from contacts.models import Contact
 
 # Artist is a special version of contact

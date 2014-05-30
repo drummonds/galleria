@@ -22,7 +22,6 @@
                 <td>
                     <a class="btn btn-info btn-xs" href="{% url 'product_detail' object.pk %}">Details</a> 
                     <a class="btn btn-warning btn-xs" href="{% url 'product_update' object.pk %}">Update</a> 
-                    <a class="btn btn-danger btn-xs" href="{% url 'product_delete' object.pk %}">Delete</a>
                 </td>
             </tr>
         {% empty %}

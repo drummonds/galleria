@@ -2,10 +2,10 @@
 {% block title %}Home{% endblock %}
 {% block content %}
     {% if request.user.is_anonymous %}
-      <h1>Welcome to {{ galleria_brand }} public page</h1>
-      {{ galleria_frontpage }}
+      <h1>Welcome to {{ galleria_brand|safe }} public page</h1>
+      {{ galleria_frontpage|safe }}
     {% else %}
-      <h1>Welcome to {{ galleria_brand }} home page</h1>
+      <h1>Welcome to {{ galleria_brand|safe }} home page</h1>
       <p>Redirecting to contacts page</p>
     {% endif %} 
 {% endblock %}
