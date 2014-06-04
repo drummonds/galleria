@@ -89,11 +89,11 @@
 
   # Setup the virtualenvwrapper
 - name: export work for virtual env wrapper
-  lineinfile: dest="/home/ubuntu/.profile"
+  lineinfile: dest="/home/ubuntu/.bashrc"
     line="export WORKON_HOME=$HOME/.virtualenvs"
 
 - name: enable shell script
-  lineinfile: dest="/home/ubuntu/.profile"
+  lineinfile: dest="/home/ubuntu/.bashrc"
     line="source /usr/local/bin/virtualenvwrapper.sh"
 
 # - name: Install the rest of pip Python packages.

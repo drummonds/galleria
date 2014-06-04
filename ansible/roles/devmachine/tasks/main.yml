@@ -45,15 +45,15 @@
 
   # Setup the virtualenvwrapper
 - name: Shell profile comment for virtual env wrapper
-  lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
+  lineinfile: dest="/home/{{ whoami.stdout }}/.bashrc"
     line="# needed for virtualenvwrapper"
 
 - name: export work for virtual env wrapper
-  lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
+  lineinfile: dest="/home/{{ whoami.stdout }}/.bashrc"
     line="export WORKON_HOME=$HOME/.virtualenvs"
 
 - name: enable shell script
-  lineinfile: dest="/home/{{ whoami.stdout }}/.profile"
+  lineinfile: dest="/home/{{ whoami.stdout }}/.bashrc"
     line="source /usr/local/bin/virtualenvwrapper.sh"
 
 - name: ensure required packages are installed.
