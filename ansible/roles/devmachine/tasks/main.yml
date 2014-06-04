@@ -43,6 +43,15 @@
   shell: virtualenv --python=/usr/bin/python3.4 "/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}"
          creates="/home/{{ whoami.stdout }}/.virtualenvs/{{ project_name }}/bin/activate"
 
+#Setup virtual envwrapper for python in case default doesn't work
+- name: Fix for making VIRTUALENVWRAPPER 1
+  lineinfile: dest="/home/{{ whoami.stdout }}/.bashrc"
+    line="VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4"
+
+- name: Fix for making VIRTUALENVWRAPPER 2
+  lineinfile: dest="/home/{{ whoami.stdout }}/.bashrc"
+    line="export VIRTUALENVWRAPPER_PYTHON"
+
   # Setup the virtualenvwrapper
 - name: Shell profile comment for virtual env wrapper
   lineinfile: dest="/home/{{ whoami.stdout }}/.bashrc"
