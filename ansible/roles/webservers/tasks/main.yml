@@ -123,12 +123,16 @@
     owner={{ usr }} group={{ usr }}
 
 - name: Create a sym link from ini file to the vassals
-  file: src=/home/ubuntu/projects/{{ project_name }}/etc/{{ project_name }}_uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
+  file: src=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
+  tags:
+    - debug
 
 - name: Install uwsgi service script
   copy: src=uwsgi_emperor.conf dest=/etc/init/uwsgi.conf
   notify: restart uwsgi
-    
+  tags:
+    - debug
+
 #  Customise deployment so django is set to the correct environment
 #  First connect the database
 
@@ -159,8 +163,6 @@
     port=3306
     login_user=postgres_admin
     login_password={{  database_password  }}
-  tags:
-    - debug
 
 - name: add postgres database file password so that psql can work
   template: src=pgpass.j2

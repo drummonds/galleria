@@ -22,7 +22,8 @@ DATABASE_HOST = 'galleria-staging.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
 # git for version control of that data
 try:
     import sys
-    private_path = BASE_PRIVATE_DIR.child('staging')
+    #Use production settings to be just like production in this release.  The private path will need to match
+    private_path = BASE_PRIVATE_DIR.child('production')
     sys.path.append(private_path)
     from private_settings import *
 except ImportError:

@@ -12,15 +12,16 @@ import os
 # Build paths inside the project like this: BASE_DIR.child("media")
 
 from unipath import Path
-BASE_DIR = Path(__file__).ancestor(3) #Root of Django project
-BASE_APP_DIR = Path(__file__).ancestor(2) #Root of main app of Django project
+SETTINGS_DIR = Path(__file__).expand_user().expand_vars().norm().absolute()
+BASE_DIR = SETTINGS_DIR.ancestor(3) #Root of Django project
+BASE_APP_DIR = SETTINGS_DIR.ancestor(2) #Root of main app of Django project
 PROJECT_NAME = BASE_DIR.name # eg galleria
 
 #The BASE_PRIVATE_DIR is the root of settings that should not be in the public GIT they are the information
 # that will customise the application to a specific client. So for development this should be very little but possible
 # if you like to have something a particular way and vital for production.
 
-BASE_PRIVATE_DIR = Path(__file__).ancestor(5).child(PROJECT_NAME + '_private')
+BASE_PRIVATE_DIR = SETTINGS_DIR.ancestor(5).child(PROJECT_NAME + '_private')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
