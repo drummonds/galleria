@@ -44,7 +44,7 @@
     - redis-server # Not currently used
     - postfix # Not currently used
 
-- name: Install required easy install Python packages.
+- name: Install required easy install Python packages for system
   easy_install: name={{ item  }}
   with_items: 
     - pip
@@ -96,17 +96,11 @@
   lineinfile: dest="/home/ubuntu/.bashrc"
     line="source /usr/local/bin/virtualenvwrapper.sh"
 
-# - name: Install the rest of pip Python packages.
-#   pip: name={{ item  }} virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}
-#   with_items: 
-#     - virtualenv
-#     - virtualenvwrapper
-#     - django
-#     - south
-#     - boto
-#     - psycopg2
-#     - uwsgi # for testing purposes
-# 
+- name: Change owner and group of Virtual env
+  file: state=directory path=/home/ubuntu/.virtualenvs
+    owner={{ usr }} group={{ usr }}
+    recurse=yes
+
 - name: ensure required packages are installed.
   sudo: yes
   action: pip 
@@ -165,6 +159,8 @@
     port=3306
     login_user=postgres_admin
     login_password={{  database_password  }}
+  tags:
+    - debug
 
 - name: add postgres database file password so that psql can work
   template: src=pgpass.j2
@@ -180,16 +176,12 @@
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }} 
-  tags:
-    - debug
 
 
 # Not yet working if I log in manually and run the command it does work
 #- name: Check to get list of django users Needs a remote connection
 #  command: psql --host={{ database_endpoint }} --dbname={{ project_name }}_db --port=3306 --username=postgres_admin -#c"select username from auth_user;" 
 #  register: django_users_check
-#  tags:
-#    - debug
 
 #Manually run by hand once only
 #- name: create superuser
@@ -199,9 +191,7 @@
 #    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
 #    settings={{ project_name }}.settings.{{ deploy_file }}
 #  when: postgres_users_check.stdout.find('test') == -1
-#  tags:
-#    - debug
-  
+
 - name: migrate apps
   django_manage: >
     command="migrate {{ item }}"
@@ -214,17 +204,7 @@
     - artists
     - stocks
     - products
-  tags:
-    - debug
-    
-# Django 1.7 version
-#- name: migrate django database. may need to do by app
-#  django_manage: >
-#    command=migrate
-#    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
-#    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
-#    settings={{ project_name }}.settings.{{ deploy_file }}
-    
+
 - name: add static root to settings file
   lineinfile: >
     dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py

@@ -9,6 +9,15 @@ Local Django settings for galleria project.
 
 from .base import *
 
+# Just in case we have a problem
+#DEBUG = True
+#TEMPLATE_DEBUG = True
+
+ALLOWED_HOSTS = ['*']
+
+
+DATABASE_HOST = 'galleria-staging.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
+
 #Allow local override which is per deployment instance.  There should probably then be an instance
 # git for version control of that data
 try:

@@ -1,0 +1,21 @@
+# Test Inventory file
+
+[webservers]
+
+[dbservers]
+
+
+[launched]
+
+[local]
+127.0.0.1
+
+[all:children]
+webservers
+dbservers
+launched
+local
+
+[all:vars]
+deploy_file=development
+database_endpoint=galleria_test.cpgyypvjajxe.eu-west-1.rds.amazonaws.com

@@ -1,8 +1,8 @@
 ---
-project_name: galleria
+# base.yml is assumed to imported in the calling function
+db_instance: galleria_test
 #TODO On deployed systems this is true but not on development systems
-project_dir: /home/ubuntu/projects
-project_root: "{{ project_dir }}/galleria"
 project_fqdn: "{{  deploy_file }}.galleria.drummonds.net"
 usr: ubuntu # default user
+deploy_file: test
 

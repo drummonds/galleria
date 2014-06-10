@@ -1,0 +1,69 @@
+---
+# create database on local machine
+# Todo this needs to be abstracted with very similar code in deploy webservers
+
+- action: shell whoami
+  register: whoami
+
+- name: Get one green light
+  debug: msg="Hi {{ whoami.stdout }}"
+
+- name: Test role vars
+  debug: msg="Hi {{ instance_type }}"
+
+- fail: msg="Stopping.  You need to define the database_password variable, see personal.yml file at ~/projects"
+  when: database_password is not defined
+
+- fail: msg="Stopping.  You need to define the project_name variable, see vars.yml"
+  when: project_name is not defined
+
+- name: What is the db password
+  # Example that prints the loopback address and gateway for each host
+  debug: msg="Password is (now) |{{ database_password }}| "
+
+- name: What is the AWS settings
+  # Example that prints the loopback address and gateway for each host
+  debug: msg="AWS key and pw is  |{{ lookup('env','AWS_ACCESS_KEY') }}| |{{ lookup('env','AWS_SECRET_KEY') }}| "
+
+#- name: Launch instance
+#  local_action: ec2
+#    keypair={{ keypair }}
+#    group={{ security_group}}
+#    instance_type={{ instance_type }}
+#    instance_tags='{"deployFile":"{{ deploy_file }}"}'
+#    image={{ image }}
+#    region={{ region }}
+#    wait=true count=1
+#  register: ec2
+
+  # Basic postgres provisioning example
+  # The db.t1.micro is slow to start at about 4-500 seconds
+  # aws_access_key = "{{ lookup('env','AWS_ACCESS_KEY') }}"
+  # aws_secret_key = "{{ lookup('env','AWS_SECRET_KEY') }}"
+
+
+- rds: >
+    command=create
+    aws_access_key={{ lookup('env','AWS_ACCESS_KEY') }}
+    instance_name={{ db_instance }}
+    db_engine=postgres
+    size=10
+    instance_type=db.t1.micro
+    username=postgres_admin
+    security_groups={{ db_security_group}}
+    region={{ region }}
+    password={{ database_password }}
+    wait=true
+    wait_timeout=900
+  register: ec2_db
+
+- name: Display all variables/facts known for a host
+  debug: var=hostvars[inventory_hostname]
+  with_items: ec2_db.instances
+
+  # Secondly add it as a current variable so that subsequent playbooks can use it.
+  # When playbooks are rerun it shouldb e brought up as a another version.
+#- hosts: local
+#  vars:
+#    database_endpoint: "{{ ec2_db.instance.endpoint }}"
+

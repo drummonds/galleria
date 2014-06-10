@@ -7,8 +7,9 @@
   gather_facts: false
 
   vars_files:
-    - ../../personal.yml
-    - vars.yml
+    - vars/base.yml # Standard setup for all environments
+    # assumes setup for environment is done at run time by
+    - ../../personal.yml #Defines database PW
 
   roles:
      - devmachine

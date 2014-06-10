@@ -1,0 +1,21 @@
+---
+# Play to provision RDS DB instances on EC2 using an inventory file from ec2.py
+# and additional information to work out which database to spin up and if it is present.
+# Todo to merge both local instances and RDS instances
+# This play is meant to be run on the local server
+
+- name: Provision DB servers
+  hosts: local
+  user: ubuntu
+  gather_facts: false
+
+  #Include secret information outside of git a copy of a template is in the files
+  #directory
+  vars_files:
+    - vars/base.yml # Standard setup for all environments
+    # assumes setup for environment is done at run time by
+    - ../../personal.yml #Defines database PW
+
+  roles:
+     - provision_rds
+

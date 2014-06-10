@@ -1,0 +1,5 @@
+---
+# Variables that are common to all environments
+project_name: galleria
+project_dir: /home/ubuntu/projects
+project_root: "{{ project_dir }}/galleria"

@@ -1,0 +1,13 @@
+---
+# Play to provision instances on EC2
+- name: provision webservers
+  hosts:  local
+  connection: local
+  user: trusty
+  gather_facts: false
+
+  tasks:
+
+  - name: testing
+    debug: "hi"
+

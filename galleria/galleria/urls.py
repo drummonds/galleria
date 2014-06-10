@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from .views import PublicView
-from contacts.views import ContactView, ContactTypeView
 
 from django.contrib import admin
 admin.autodiscover()

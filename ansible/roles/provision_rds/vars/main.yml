@@ -1,0 +1,10 @@
+--- #Var for provision_rds
+keypair: galleria
+#t1.micro instance has no instance memory ans so incurs extra cost in ebs storage. avoiding complexity by using
+#smallest regular instance
+instance_type:  m1.small
+db_security_group: dbsecuritygroup
+region: "eu-west-1"
+#test for ec2
+security_group: webappsecuritygroup
+image: ami-116b9166

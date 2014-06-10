@@ -1,0 +1,1 @@
+/home/ubuntu/projects/ansible/plugins/inventory/ec2.py
