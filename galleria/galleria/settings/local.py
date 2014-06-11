@@ -13,6 +13,7 @@ TEMPLATE_DEBUG = True
 # Write the email to the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+#This is a local database so relatively safe to put password and user under source control
 DATABASE_HOST = '127.0.0.1'
 DATABASE_PORT = 5432
 DATABASE_USER = 'postgres_admin'

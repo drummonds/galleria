@@ -35,15 +35,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DEFAULT_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', #Automatically serves static files from runserver when DEBUG==True
 )
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 THIRD_PARTY_APPS = (
     'south',
@@ -82,6 +81,8 @@ TEMPLATE_DIRS = (
     BASE_APP_DIR.child('templates'),
 )
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -102,24 +103,22 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "galleria.context_processors.galleria_context_processor",
 )
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASE_HOST = 'galleria.cpgyypvjajxe.eu-west-1.rds.amazonaws.com'
+DATABASE_HOST = 'galleria.somewhere.eu-west-1.rds.amazonaws.com'
 DATABASE_PORT = 3306
 DATABASE_USER = 'postgres_admin'
-DATABASE_PASSWORD = 'K4B9-RUrg-bao9-osUb-77Ur'
+DATABASE_PASSWORD = '1234-is-not-safe'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'galleria_db',
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASSWORD,
-        'HOST' : DATABASE_HOST,
-        'PORT': DATABASE_PORT,
-    }
-}
+#Defined in private
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'galleria_db',
+#        'USER': DATABASE_USER,
+#        'PASSWORD': DATABASE_PASSWORD,
+#        'HOST' : DATABASE_HOST,
+#        'PORT': DATABASE_PORT,
+#    }
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -139,6 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/ubuntu/projects/galleria/galleria/static/'
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
@@ -152,3 +152,11 @@ except ImportError:
 GALLERIA_BRAND = PROJECT_NAME
 GALLERIA_FRONTPAGE = '<img src="https://raw.githubusercontent.com/drummonds/galleria/master/documentation/images/home-sketch.png" alt=" Galleria home page" />'
 
+# For grappelli the appdirectories needs to be first
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+)
+
+#Grappelli customisation
+GRAPPELLI_ADMIN_TITLE="Galleria admin"

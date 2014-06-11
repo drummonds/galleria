@@ -25,6 +25,8 @@ class AddressInline(InlineFormSet):
 
 class NoteInline(InlineFormSet):
     model = Note
+    max_num = 3
+    extra = 1
 
 
 class ContactUpdate(UpdateWithInlinesView):
