@@ -17,6 +17,8 @@
   git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
     dest=/home/ubuntu/projects/{{ project_name }}
     accept_hostkey=True 
+  tags:
+    - debug
 
   #Not perfect as really wanted to do the git with the required user rather than change
   #ownwer and group later.  But need to do some commands with sudo
@@ -105,6 +107,8 @@
   sudo: yes
   action: pip 
     requirements={{project_root}}/requirements/{{ deploy_file }}.txt virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}
+  tags:
+    - debug
 
 
 # Project setup
@@ -124,14 +128,10 @@
 
 - name: Create a sym link from ini file to the vassals
   file: src=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
-  tags:
-    - debug
 
 - name: Install uwsgi service script
   copy: src=uwsgi_emperor.conf dest=/etc/init/uwsgi.conf
   notify: restart uwsgi
-  tags:
-    - debug
 
 #  Customise deployment so django is set to the correct environment
 #  First connect the database

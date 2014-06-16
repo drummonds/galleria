@@ -15,5 +15,5 @@ markdown2==2.2.1
 psycopg2==2.5.3
 six==1.6.1
 sqlparse==0.1.11
-django.js=git+https://github.com/drummonds/django.js.git
+git+https://github.com/drummonds/django.js.git
 django-eztables==0.3.2
