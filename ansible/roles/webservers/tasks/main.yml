@@ -17,8 +17,6 @@
   git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
     dest=/home/ubuntu/projects/{{ project_name }}
     accept_hostkey=True 
-  tags:
-    - debug
 
   #Not perfect as really wanted to do the git with the required user rather than change
   #ownwer and group later.  But need to do some commands with sudo
@@ -107,8 +105,6 @@
   sudo: yes
   action: pip 
     requirements={{project_root}}/requirements/{{ deploy_file }}.txt virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}
-  tags:
-    - debug
 
 
 # Project setup
@@ -116,26 +112,23 @@
   file: state=directory path=/home/ubuntu/projects 
     owner={{ usr }} group={{ usr }}
 
-
 # Install uWSGI
-- name: add uWSGI parameter file
-  template: src=uwsgi.ini.j2
-    dest=/home/ubuntu/projects/{{ project_name }}/etc/{{ project_name }}_uwsgi.ini
-    
 - name: Create the directory for the vassals (using uwsgi in emperor mode)
   file: state=directory path=/etc/uwsgi/vassals
     owner={{ usr }} group={{ usr }}
 
 - name: Create a sym link from ini file to the vassals
-  file: src=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
+  file: src=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/uwsgi.ini dest=/etc/uwsgi/vassals/{{ project_name }}_uwsgi.ini  state=link
+  notify: restart uwsgi
 
 - name: Install uwsgi service script
   copy: src=uwsgi_emperor.conf dest=/etc/init/uwsgi.conf
   notify: restart uwsgi
 
-#  Customise deployment so django is set to the correct environment
-#  First connect the database
 
+#  Customise deployment so django is set to the correct environment
+
+#  First connect the database
 - name: Connect database endpoint to django
   lineinfile: dest=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}/{{ project_name }}/settings/{{ deploy_file }}.py
     regexp="^DATABASE_HOST" 
@@ -178,21 +171,9 @@
     app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }} 
+  tags:
+    - debug
 
-
-# Not yet working if I log in manually and run the command it does work
-#- name: Check to get list of django users Needs a remote connection
-#  command: psql --host={{ database_endpoint }} --dbname={{ project_name }}_db --port=3306 --username=postgres_admin -#c"select username from auth_user;" 
-#  register: django_users_check
-
-#Manually run by hand once only
-#- name: create superuser
-#  django_manage: >
-#    command=add_superuser --user=test --password=test --email=test@test.com
-#    app_path=/home/ubuntu/projects/{{ project_name }}/{{ project_name }}
-#    virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
-#    settings={{ project_name }}.settings.{{ deploy_file }}
-#  when: postgres_users_check.stdout.find('test') == -1
 
 - name: migrate apps
   django_manage: >
@@ -220,11 +201,7 @@
     virtualenv=/home/ubuntu/.virtualenvs/{{ project_name }}     
     settings={{ project_name }}.settings.{{ deploy_file }}
     
-#- name: Install nginx 
-#  include: nginx.yml
-
 # Seems to keep freezing here so installing directly
-
 - name: install nginx as a front end web server
   apt: pkg={{ item }} state=installed
   with_items:
