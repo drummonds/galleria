@@ -1,7 +1,7 @@
 # Staging Inventory file
 
 [webservers]
-ec2-54-195-227-41.eu-west-1.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/galleria.pem
+ec2-54-74-56-30.eu-west-1.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/galleria.pem
 
 [dbservers]
 

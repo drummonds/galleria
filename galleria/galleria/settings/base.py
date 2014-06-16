@@ -160,3 +160,6 @@ STATICFILES_FINDERS = (
 
 #Grappelli customisation
 GRAPPELLI_ADMIN_TITLE="Galleria admin"
+
+#Just in case Debug toolbar is being used it must be configured explicitly to work under UWSGI
+DEBUG_TOOLBAR_PATCH_SETTINGS = False

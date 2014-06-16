@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
+from django.contrib import admin
+
 from .views import PublicView
 
-from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -26,3 +28,9 @@ urlpatterns = patterns('',
 
     url(r'^', PublicView.as_view(), name='public'), # Catchall and take to front page
 )
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
