@@ -73,6 +73,44 @@ class Address(models.Model):
     postcode = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
+    def _get_full_address(self):
+        "Returns the person's full name."
+        result = '';
+        for line in (self.street, self.city, self.county, self.postcode, self.country, ):
+            if line:
+                result+='{}\n'.format(line)
+        return result
+    full_address = property(_get_full_address)
+
+    def _get_short_summary(self):
+        "Returns a short summary of this address."
+        result = '';
+        if self.street:
+            result+='{}\n'.format(self.street)
+        elif self.city:
+            result+='{}\n'.format(self.city)
+        elif self.county:
+            result+='{}\n'.format(self.county)
+        elif self.postcode:
+            result+='{}\n'.format(self.postcode)
+        if self.cuontry:
+            if result:
+                result+='{}'.format(self.country)
+            else:
+                result = '{}'.format(self.country)
+        return result
+    short_summary = property(_get_short_summary)
+
+@property
+def summary(self):
+    return(self.short_summary)
+
+def __str__(self):
+    return("{}".format(self.short_summary))
+
+def __repr__(self):
+    return self.__str__()
+
 class contacts(TimeStampedModel):
     address_city_selected    =models.TextField()
     address_display_c1    =models.TextField()

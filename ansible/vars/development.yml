@@ -3,8 +3,8 @@
 #TODO On deployed systems this is true but not on development systems
 project_fqdn: "{{  deploy_file }}.galleria.drummonds.net"
 usr: ubuntu # default user
-deploy_file: staging
+deploy_file: development
 
 #Ansible name for database instance (on the staging server)
-db_instance: galleria-db
+db_instance: galleria_development_db
 database_endpoint: galleria-staging.cpgyypvjajxe.eu-west-1.rds.amazonaws.com

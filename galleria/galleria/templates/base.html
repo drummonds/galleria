@@ -47,8 +47,8 @@
           <li class="dropdown" {% block nav-englishroom-dropdown %}{% endblock %}>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">English Room<b class="caret"></b></a>
             <ul class="dropdown-menu">
+              {% block nav-orders %}<li><a href="/products/orders/">Orders</a></li>{% endblock %}
               {% block nav-products %}<li><a href="/products/">Products</a></li>{% endblock %}
-              <li><a href="#">Ordering</a></li>
             </ul>
           </li>
           <li class="dropdown" {% block nav-admin-dropdown %}{% endblock %}>

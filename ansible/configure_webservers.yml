@@ -7,12 +7,12 @@
   sudo: true
   
 
-  #Include secret information outside of git a copy of a template is in the files
-  #directory
+  #Include configuration information
   vars_files:
-    - vars/base.yml # Standard setup for all environments
-    # assumes setup for environment is done at run time by
-    - ../../personal.yml #Defines database PW
+    # The envirnoment variables have been setup up at run time via eg --extra-vars "@vars/development.yml"
+    - vars/base.yml # Standard setup for all environments which will overwrite and extra vars
+    - ../../personal.yml #Defines database PW, GIT tokens etc, information specific to me
+    #Further information will come from ../../galleria_private/development/development but into Django settings
 
   roles:
      - common
