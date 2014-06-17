@@ -12,9 +12,10 @@
 - name: Create the project directory.
   file: state=directory path=/home/ubuntu/projects/{{ project_name }}
     owner={{ usr }} group={{ usr }}
-    
+
+# Clone from Git the master project
 - name: Git clone
-  git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
+  git: repo={{ galleria_private_url }}
     dest=/home/ubuntu/projects/{{ project_name }}
     accept_hostkey=True 
 
@@ -25,6 +26,19 @@
     owner={{ usr }} group={{ usr }}
     recurse=yes
   
+# Clone from Git the private project settings
+- name: Git clone private settings assumed private github
+  git: repo={{ galleria_private }}https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
+    dest=/home/ubuntu/projects/{{ project_name }}
+    accept_hostkey=True
+
+  #Not perfect as really wanted to do the git with the required user rather than change
+  #ownwer and group later.  But need to do some commands with sudo
+- name: Change owner
+  file: state=directory path=/home/ubuntu/projects/{{ project_name }}
+    owner={{ usr }} group={{ usr }}
+    recurse=yes
+
 # Make sure directory for ephemeral files is created.
 - name: add ephemeral file directory
   file: state=directory path=/home/ubuntu/projects/{{ project_name }}/etc

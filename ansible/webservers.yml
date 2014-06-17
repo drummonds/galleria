@@ -38,7 +38,7 @@
     with_items: ec2.instances
     
   - name: Add instance to webservers group for next time ansible is run
-    local_action: lineinfile dest={{ deploy_file }} 
+    local_action: lineinfile dest={{ deploy_file_path }}
       insertafter="\[webservers\]" 
       line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
     with_items: ec2.instances
