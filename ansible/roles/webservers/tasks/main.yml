@@ -15,7 +15,7 @@
 
 # Clone from Git the master project
 - name: Git clone
-  git: repo={{ galleria_private_url }}
+  git: repo=https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
     dest=/home/ubuntu/projects/{{ project_name }}
     accept_hostkey=True 
 
@@ -28,7 +28,7 @@
   
 # Clone from Git the private project settings
 - name: Git clone private settings assumed private github
-  git: repo={{ galleria_private }}https://{{ git_personal_access_token }}@github.com/drummonds/{{ project_name }}.git
+  git: repo={{ galleria_private_url }}
     dest=/home/ubuntu/projects/{{ project_name }}
     accept_hostkey=True
 
