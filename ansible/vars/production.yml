@@ -1,0 +1,10 @@
+---
+# base.yml is assumed to imported in the calling function
+#TODO On deployed systems this is true but not on development systems
+project_fqdn: "galleria.drummonds.net"
+usr: ubuntu # default user
+deploy_file: production
+
+#Ansible name for database instance (on the staging server)
+db_instance: galleria-db
+database_endpoint: galleria.cpgyypvjajxe.eu-west-1.rds.amazonaws.com

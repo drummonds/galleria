@@ -51,6 +51,9 @@ THIRD_PARTY_APPS = (
     'crispy_forms',
     'django_tables2',
     'django_filters',
+    # Problem with Python 3 for boto
+    # 'boto',
+    'storages',
 )
 
 LOCAL_APPS = (
@@ -163,3 +166,4 @@ GRAPPELLI_ADMIN_TITLE="Galleria admin"
 
 #Just in case Debug toolbar is being used it must be configured explicitly to work under UWSGI
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+

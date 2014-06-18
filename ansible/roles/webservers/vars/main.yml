@@ -1,0 +1,4 @@
+---
+# Ports for UWSGI to run on
+uwsgi_port_test: 8000
+uwsgi_port: 8001
